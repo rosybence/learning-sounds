@@ -106,11 +106,15 @@
     const g = ac.createGain(); const d = open ? 0.28 : 0.045; env(g.gain, t, vol, 0.001, d);
     n.connect(hp); hp.connect(g); g.connect(out); n.start(t, Math.random()); n.stop(t + d + 0.05);
   }
+  // ride: filtered noise only (no steady tones, so no whistle)
   function ride(ac, out, t, vol = 0.18) {
-    const g = ac.createGain(); env(g.gain, t, vol, 0.001, 0.5);
-    const bp = ac.createBiquadFilter(); bp.type = "bandpass"; bp.frequency.value = 5200; bp.Q.value = 0.8;
-    const n = noise(ac); n.connect(bp); bp.connect(g); g.connect(out); n.start(t, Math.random()); n.stop(t + 0.6);
-    [3100, 4730, 5900].forEach(f => osc(ac, "square", f, g, t, t + 0.6));
+    const hp = ac.createBiquadFilter(); hp.type = "highpass"; hp.frequency.value = 6000;
+    const pk = ac.createBiquadFilter(); pk.type = "peaking"; pk.frequency.value = 9000; pk.gain.value = 4; pk.Q.value = 0.7;
+    const g = ac.createGain(); g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(vol, t + 0.002);
+    g.gain.exponentialRampToValueAtTime(vol * 0.35, t + 0.04);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + 0.3);
+    const n = noise(ac); n.connect(hp); hp.connect(pk); pk.connect(g); g.connect(out); n.start(t, Math.random()); n.stop(t + 0.35);
   }
   function clap(ac, out, t, vol = 0.7) {
     const bp = ac.createBiquadFilter(); bp.type = "bandpass"; bp.frequency.value = 1300; bp.Q.value = 1.2;
