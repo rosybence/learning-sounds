@@ -6,7 +6,7 @@
 
 window.CARDS = [
   {
-    id: "amen", name: "Amen break", aka: "Amen, chopped break",
+    id: "amen", showReal: true, name: "Amen break", aka: "Amen, chopped break",
     genre: "jungle", also: ["Drum & bass", "Breakcore"], type: "Drums",
     listen: "A fast, rolling, slightly dusty drum loop with a crashing ride and snares that skip and stutter. Chopped and re-sequenced at around 160–175 BPM.",
     recipe: [
@@ -23,8 +23,8 @@ window.CARDS = [
     inFL: true,
     tutorials: ["how to chop amen break fl studio", "jungle break chopping tutorial"],
     examples: [
-      { artist: "The Winstons", track: "Amen, Brother", year: 1969, note: "The source — drum solo at 1:26" },
-      { artist: "Shy FX & UK Apache", track: "Original Nuttah", year: 1994 }
+      { artist: "The Winstons", track: "Amen, Brother", year: 1969, note: "The source — drum solo at 1:26", yt: "QpgeOYQHKcs", t: 86 },
+      { artist: "Shy FX & UK Apache", track: "Original Nuttah", year: 1994, yt: "sxbekgL4w7w", t: 0 }
     ]
   },
   {
@@ -45,8 +45,8 @@ window.CARDS = [
     inFL: true,
     tutorials: ["how to make reese bass vital", "reese bass 3x osc fl studio"],
     examples: [
-      { artist: "Reese (Kevin Saunderson)", track: "Just Want Another Chance", year: 1988, note: "Where the name comes from" },
-      { artist: "Bad Company", track: "The Nine", year: 1998 }
+      { artist: "Reese (Kevin Saunderson)", track: "Just Want Another Chance", year: 1988, note: "Where the name comes from", yt: "_kOwlbMBO0U", t: 0 },
+      { artist: "Bad Company", track: "The Nine", year: 1998, yt: "nRpdg4-ljb8", t: 0 }
     ]
   },
   {
@@ -67,8 +67,8 @@ window.CARDS = [
     inFL: false,
     tutorials: ["how to make hoover sound vital", "alpha juno hoover synth tutorial"],
     examples: [
-      { artist: "Second Phase (Joey Beltram)", track: "Mentasm", year: 1991 },
-      { artist: "Human Resource", track: "Dominator", year: 1991 }
+      { artist: "Second Phase (Joey Beltram)", track: "Mentasm", year: 1991, yt: "GpOqgnFSUAo", t: 0 },
+      { artist: "Human Resource", track: "Dominator", year: 1991, yt: "i7P0686tpXE", t: 0 }
     ]
   },
   {
@@ -79,7 +79,7 @@ window.CARDS = [
       "Take a dancehall/ragga acapella or MC line.",
       "Chop single words or phrases; repeat and stutter them in time.",
       "Often pitched up or down, with delay throws on the last word.",
-      "This one is a recording, so the app links to examples rather than synthesising it."
+      "This is a recording, so the card plays a real example from YouTube."
     ],
     plugins: [
       { name: "Fruity Slicer", where: "FL", note: "Chop vocals into slices" },
@@ -89,8 +89,8 @@ window.CARDS = [
     inFL: true,
     tutorials: ["ragga jungle vocal chop tutorial", "how to make ragga jungle fl studio"],
     examples: [
-      { artist: "M-Beat feat. General Levy", track: "Incredible", year: 1994 },
-      { artist: "Shy FX & UK Apache", track: "Original Nuttah", year: 1994 }
+      { artist: "M-Beat feat. General Levy", track: "Incredible", year: 1994, yt: "VcgsvxDsZV0", t: 0 },
+      { artist: "Shy FX & UK Apache", track: "Original Nuttah", year: 1994, yt: "sxbekgL4w7w", t: 0 }
     ]
   },
   {
@@ -111,8 +111,7 @@ window.CARDS = [
     inFL: true,
     tutorials: ["how to make dub siren synth", "dub siren vital tutorial"],
     examples: [
-      { artist: "Congo Natty", track: "Junglist", year: 2013 },
-      { artist: "Jah Shaka", track: "sound system", year: null, note: "Live sound-system culture" }
+      { artist: "Congo Natty", track: "Junglist", year: 2013, yt: "du12Bk7A3RE", t: 0 }
     ]
   },
   {
@@ -133,8 +132,8 @@ window.CARDS = [
     inFL: true,
     tutorials: ["how to make dubstep sub bass", "sub bass sine fl studio 3x osc"],
     examples: [
-      { artist: "Digital Mystikz", track: "Anti-War Dub", year: 2006 },
-      { artist: "Skream", track: "Midnight Request Line", year: 2005 }
+      { artist: "Digital Mystikz", track: "Anti-War Dub", year: 2006, yt: "G9H3i0T1iN4", t: 0 },
+      { artist: "Skream", track: "Midnight Request Line", year: 2005, yt: "UFvEoJcLvgM", t: 0 }
     ]
   },
   {
@@ -155,8 +154,8 @@ window.CARDS = [
     inFL: true,
     tutorials: ["how to make wobble bass vital", "dubstep wobble bass fl studio"],
     examples: [
-      { artist: "Caspa & Rusko", track: "Cockney Thug", year: 2007 },
-      { artist: "Benga & Coki", track: "Night", year: 2007 }
+      { artist: "Rusko", track: "Cockney Thug (Caspa Remix)", year: 2007, yt: "elhO7i1xgrU", t: 0 },
+      { artist: "Benga & Coki", track: "Night", year: 2007, yt: "rNStVlJWy88", t: 0 }
     ]
   },
   {
@@ -176,8 +175,8 @@ window.CARDS = [
     inFL: true,
     tutorials: ["how to make dubstep drums 140", "half step drum pattern tutorial"],
     examples: [
-      { artist: "Mala", track: "Changes", year: 2006 },
-      { artist: "Benga & Coki", track: "Night", year: 2007 }
+      { artist: "Mala", track: "Changes", year: 2006, yt: "iE6LnK17jYY", t: 0 },
+      { artist: "Benga & Coki", track: "Night", year: 2007, yt: "rNStVlJWy88", t: 0 }
     ]
   },
   {
@@ -198,8 +197,8 @@ window.CARDS = [
     inFL: true,
     tutorials: ["dub delay throws tutorial", "dub techniques fl studio delay 3"],
     examples: [
-      { artist: "Kode9 & The Spaceape", track: "Sine of the Dub", year: 2004 },
-      { artist: "King Tubby", track: "dub mixes", year: null, note: "The pioneer of dub mixing" }
+      { artist: "Kode9 & The Spaceape", track: "Sine of the Dub", year: 2004, yt: "M9SN23xZQ_Y", t: 0 },
+      { artist: "Augustus Pablo & King Tubby", track: "King Tubby Meets Rockers Uptown", year: 1976, note: "Classic dub mixing", yt: "NoXYJkOeYSM", t: 0 }
     ]
   },
   {
@@ -220,8 +219,8 @@ window.CARDS = [
     inFL: false,
     tutorials: ["how to make burial style track", "vinyl crackle izotope vinyl tutorial"],
     examples: [
-      { artist: "Burial", track: "Archangel", year: 2007 },
-      { artist: "Burial", track: "Near Dark", year: 2007 }
+      { artist: "Burial", track: "Archangel", year: 2007, yt: "8k_f2QK77ew", t: 0 },
+      { artist: "Burial", track: "Near Dark", year: 2007, yt: "TK7aQmdqCj8", t: 0 }
     ]
   },
   {
@@ -241,8 +240,8 @@ window.CARDS = [
     inFL: true,
     tutorials: ["how to make uk garage 2 step beat", "2 step drums fl studio"],
     examples: [
-      { artist: "Artful Dodger feat. Craig David", track: "Re-Rewind", year: 1999 },
-      { artist: "MJ Cole", track: "Sincere", year: 1998 }
+      { artist: "Artful Dodger feat. Craig David", track: "Re-Rewind", year: 1999, yt: "M0wv_cQv8As", t: 0 },
+      { artist: "MJ Cole", track: "Sincere", year: 1998, yt: "cy-djtiU5RE", t: 0 }
     ]
   },
   {
@@ -263,19 +262,19 @@ window.CARDS = [
     inFL: true,
     tutorials: ["m1 organ bass tutorial", "speed garage organ bass vital"],
     examples: [
-      { artist: "Robin S", track: "Show Me Love", year: 1993, note: "The M1 organ sound" },
-      { artist: "T2", track: "Heartbroken", year: 2007 }
+      { artist: "Robin S", track: "Show Me Love", year: 1993, note: "The M1 organ sound", yt: "0UFKmhDIghU", t: 0 },
+      { artist: "T2", track: "Heartbroken", year: 2007, yt: "KG28976TmDM", t: 0 }
     ]
   },
   {
     id: "rnbvocal", name: "Pitched R&B vocal chop", aka: "Chopped vocal, vocal edit",
     genre: "garage", also: ["Future garage", "Dubstep"], type: "Vocal",
-    listen: "Snippets of soulful singing, pitched up and cut into a new rhythmic melody. In-app version is a synthesised 'ooh-ah' imitation.",
+    listen: "Snippets of soulful singing, pitched up and cut into a new rhythmic melody. Plays the real thing from YouTube.",
     recipe: [
       "Take an R&B acapella.",
       "Chop single syllables and re-sequence them into a new rhythm.",
       "Pitch them up (often +3 to +7 semitones) and add reverb.",
-      "Real vocals sound best — check the examples."
+      "This is a recording, so the card plays a real example from YouTube."
     ],
     plugins: [
       { name: "Edison", where: "FL", note: "Chop + pitch" },
@@ -285,8 +284,8 @@ window.CARDS = [
     inFL: true,
     tutorials: ["uk garage vocal chop tutorial", "burial style vocal chops tutorial"],
     examples: [
-      { artist: "Burial", track: "Archangel", year: 2007 },
-      { artist: "Todd Edwards", track: "Saved My Life", year: 1996, note: "Pioneer of chopped vocals" }
+      { artist: "Burial", track: "Archangel", year: 2007, yt: "8k_f2QK77ew", t: 0 },
+      { artist: "Todd Edwards", track: "Saved My Life", year: 1996, note: "Pioneer of chopped vocals", yt: "U-RE8IsrzzM", t: 0 }
     ]
   },
   {
@@ -307,8 +306,8 @@ window.CARDS = [
     inFL: true,
     tutorials: ["uk garage chords tutorial", "minor 9th chord stabs house"],
     examples: [
-      { artist: "MJ Cole", track: "Sincere", year: 1998 },
-      { artist: "Wookie", track: "Battle", year: 2000 }
+      { artist: "MJ Cole", track: "Sincere", year: 1998, yt: "cy-djtiU5RE", t: 0 },
+      { artist: "Wookie", track: "Battle", year: 2000, yt: "0nggZE0A9nE", t: 0 }
     ]
   },
   {
@@ -329,8 +328,8 @@ window.CARDS = [
     inFL: true,
     tutorials: ["how to make rewind effect fl studio", "dj spinback sound effect tutorial"],
     examples: [
-      { artist: "Artful Dodger feat. Craig David", track: "Re-Rewind", year: 1999 },
-      { artist: "Shy FX & UK Apache", track: "Original Nuttah", year: 1994 }
+      { artist: "Artful Dodger feat. Craig David", track: "Re-Rewind", year: 1999, yt: "M0wv_cQv8As", t: 0 },
+      { artist: "Shy FX & UK Apache", track: "Original Nuttah", year: 1994, yt: "sxbekgL4w7w", t: 0 }
     ]
   },
   {
@@ -351,8 +350,8 @@ window.CARDS = [
     inFL: true,
     tutorials: ["how to make 808 kick from scratch", "electro 808 drums tutorial"],
     examples: [
-      { artist: "Afrika Bambaataa & Soulsonic Force", track: "Planet Rock", year: 1982 },
-      { artist: "Marvin Gaye", track: "Sexual Healing", year: 1982 }
+      { artist: "Afrika Bambaataa & Soulsonic Force", track: "Planet Rock", year: 1982, yt: "9J3lwZjHenA", t: 0 },
+      { artist: "Marvin Gaye", track: "Sexual Healing", year: 1982, yt: "9LxPoJ4QoSk", t: 0 }
     ]
   },
   {
@@ -373,12 +372,12 @@ window.CARDS = [
     inFL: true,
     tutorials: ["808 cowbell synthesis tutorial", "electro beat 808 fl studio"],
     examples: [
-      { artist: "Egyptian Lover", track: "Egypt, Egypt", year: 1984 },
-      { artist: "Afrika Bambaataa & Soulsonic Force", track: "Planet Rock", year: 1982 }
+      { artist: "Egyptian Lover", track: "Egypt, Egypt", year: 1984, yt: "6mGD2oIlzN4", t: 0 },
+      { artist: "Afrika Bambaataa & Soulsonic Force", track: "Planet Rock", year: 1982, yt: "9J3lwZjHenA", t: 0 }
     ]
   },
   {
-    id: "vocoder", name: "Vocoder robot voice", aka: "Vocoder",
+    id: "vocoder", showReal: true, name: "Vocoder robot voice", aka: "Vocoder",
     genre: "electro", also: ["Electro-funk", "Synth-pop"], type: "Vocal",
     listen: "A flat, robotic voice that sounds like a synth is talking — the words have the shape of speech but the tone of a keyboard.",
     recipe: [
@@ -394,8 +393,8 @@ window.CARDS = [
     inFL: false,
     tutorials: ["how to use tal vocoder fl studio", "vocoder robot voice tutorial"],
     examples: [
-      { artist: "Kraftwerk", track: "The Robots", year: 1978 },
-      { artist: "Herbie Hancock", track: "Rockit", year: 1983 }
+      { artist: "Kraftwerk", track: "The Robots", year: 1978, yt: "DTnwRsFCXYc", t: 0 },
+      { artist: "Herbie Hancock", track: "Rockit", year: 1983, yt: "GHhD4PD75zY", t: 0 }
     ]
   },
   {
@@ -416,8 +415,8 @@ window.CARDS = [
     inFL: true,
     tutorials: ["orchestra hit sound history", "how to make orchestra hit synth"],
     examples: [
-      { artist: "Afrika Bambaataa & Soulsonic Force", track: "Planet Rock", year: 1982 },
-      { artist: "Art of Noise", track: "Close (to the Edit)", year: 1984 }
+      { artist: "Afrika Bambaataa & Soulsonic Force", track: "Planet Rock", year: 1982, yt: "9J3lwZjHenA", t: 0 },
+      { artist: "Art of Noise", track: "Close (to the Edit)", year: 1984, yt: "-sFK0-lcjGU", t: 0 }
     ]
   },
   {
@@ -438,8 +437,8 @@ window.CARDS = [
     inFL: true,
     tutorials: ["how to make acid bassline 303", "acid 303 sound fl studio"],
     examples: [
-      { artist: "Phuture", track: "Acid Tracks", year: 1987 },
-      { artist: "Hardfloor", track: "Acperience 1", year: 1992 }
+      { artist: "Phuture", track: "Acid Tracks", year: 1987, yt: "yKHGv6Es610", t: 0 },
+      { artist: "Hardfloor", track: "Acperience 1", year: 1992, yt: "Un4CeV_l3pI", t: 0 }
     ]
   }
 ];

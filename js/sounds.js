@@ -350,15 +350,6 @@
       if (noiseAmt) { const n = noise(ac); const ng = ac.createGain(); env(ng.gain, st, noiseAmt, 0.002, 0.04); n.connect(ng); ng.connect(sum); n.start(st, Math.random()); n.stop(st + 0.06); }
     });
   }
-  R.rnbvocal = (ac, out, t) => {
-    const st = 60 / 132 / 4, sw = st * 0.25, bus = reverb(ac, out, 2.2, 0.4);
-    const sy = [[0, 2, "o", 1], [3, 1, "a", 1.122], [4, 3, "e", 1.335], [8, 1, "o", 1.122], [10, 2, "a", 1], [12, 1, "u", 0.891], [13, 3, "o", 1],
-                [16, 2, "o", 1], [19, 1, "a", 1.122], [20, 2, "e", 1.498], [23, 1, "e", 1.335], [24, 4, "a", 1.122]];
-    voice(ac, bus, [midi(69)], sy.map(([i, l, v, p]) => [t + i * st + (i % 2 ? sw : 0), l * st * 0.85, v, p]), { type: "sawtooth", vib: 18, vol: 0.32, noiseAmt: 0.05 });
-    for (let b = 0; b < 2; b++) { kick(ac, out, t + b * 16 * st, { vol: 0.5 }); clap(ac, out, t + (b * 16 + 4) * st, 0.25); clap(ac, out, t + (b * 16 + 12) * st, 0.25); }
-    return 32 * st + 1;
-  };
-
   R.stabs = (ac, out, t) => {
     const st = 60 / 132 / 4, sw = st * 0.25, bus = delay(ac, reverb(ac, out, 1.8, 0.25), st * 3, 0.3, 3000, 0.3);
     const chords = { cm9: [48, 51, 55, 58, 62], fm9: [53, 56, 60, 63, 67], abmaj7: [44, 51, 55, 60, 63], gm7: [43, 50, 53, 58, 62] };

@@ -48,7 +48,7 @@
   async function playCard(card, el, label) {
     clearPlaying();
     scopeColor = GENRES[card.genre].color;
-    if (!SE.has(card.id)) { setNow("RECORDED · SEE EXAMPLES"); return; }
+    if (!SE.has(card.id)) { setNow("RECORDED · OPEN CARD"); return; }
     setNow(label || card.name.toUpperCase());
     if (el) { playingEl = el; el.style.setProperty("--dur", "3s"); el.classList.add("playing"); }
     const len = await SE.play(card.id);
@@ -82,7 +82,7 @@
       const i = CARDS.indexOf(c) + 1, col = GENRES[c.genre].color;
       return `<div class="pad" role="button" tabindex="0" data-id="${c.id}" style="--c:${col}">
         <div class="pad-top"><span class="pad-num">${String(i).padStart(2, "0")}</span><span class="pad-type">${c.type}</span></div>
-        <div><div class="pad-name">${esc(c.name)}</div><div class="pad-genre">${GENRES[c.genre].label}${SE.has(c.id) ? "" : " · <span class='pad-yt'>YT only</span>"}</div></div>
+        <div><div class="pad-name">${esc(c.name)}</div><div class="pad-genre">${GENRES[c.genre].label}${SE.has(c.id) ? "" : " · <span class='pad-yt'>▶ YouTube</span>"}</div></div>
         <button class="pad-info" data-info="${c.id}" aria-label="Open card">ⓘ</button>
       </div>`;
     }).join("");
@@ -96,6 +96,67 @@
 
   // ---------- card ----------
   const modal = $("#modal"), flip = $("#flip");
+  // ---------- embedded YouTube examples ----------
+  const fmt = t => Math.floor(t / 60) + ":" + String(Math.floor(t % 60)).padStart(2, "0");
+  const startKey = (cid, i) => `ls_start_${cid}_${i}`;
+  const startOf = (c, i) => store.get(startKey(c.id, i), c.examples[i].t || 0);
+  let ytReady = null;
+  function loadYT() {
+    if (ytReady) return ytReady;
+    ytReady = new Promise(res => {
+      if (window.YT && YT.Player) return res(true);
+      window.onYouTubeIframeAPIReady = () => res(true);
+      const sc = document.createElement("script"); sc.src = "https://www.youtube.com/iframe_api";
+      sc.onerror = () => res(false); document.head.appendChild(sc);
+      setTimeout(() => res(!!(window.YT && YT.Player)), 6000);
+    });
+    return ytReady;
+  }
+  const players = [];
+  function slotHTML(c, i) {
+    const e = c.examples[i];
+    return `<div class="video" data-cid="${c.id}" data-i="${i}">${coverHTML(c, i)}</div>
+      <div class="vbar" data-cid="${c.id}" data-i="${i}">
+        <span class="vstart">▶ starts at <b>${fmt(startOf(c, i))}</b></span>
+        <button class="vbtn hidden" data-mark>📍 Set start here</button>
+        <button class="vbtn hidden" data-reset>↺</button>
+      </div>`;
+  }
+  function coverHTML(c, i) {
+    const e = c.examples[i];
+    return `<button class="video-cover" data-loadvideo style="background-image:url(https://i.ytimg.com/vi/${e.yt}/hqdefault.jpg)"><span class="yt big">▶</span></button>`;
+  }
+  async function loadVideo(slot) {
+    SE.stop(); clearPlaying(); stopVideos();
+    const c = byId[slot.dataset.cid], i = +slot.dataset.i, e = c.examples[i], st = Math.floor(startOf(c, i));
+    const host = document.createElement("div"); slot.innerHTML = ""; slot.appendChild(host);
+    const bar = slot.nextElementSibling;
+    const ok = await loadYT();
+    if (!slot.isConnected) return;
+    if (ok) {
+      const pl = new YT.Player(host, { host: "https://www.youtube-nocookie.com", videoId: e.yt, width: "100%", height: "100%",
+        playerVars: { start: st, autoplay: 1, playsinline: 1, rel: 0, modestbranding: 1 },
+        events: { onReady: ev => { ev.target.seekTo(st, true); ev.target.playVideo(); } } });
+      slot._player = pl; players.push(slot);
+      bar.querySelectorAll(".vbtn").forEach(b => b.classList.remove("hidden"));
+    } else {
+      slot.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${e.yt}?start=${st}&autoplay=1&rel=0&playsinline=1" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
+    }
+  }
+  function stopVideos() {
+    document.querySelectorAll(".video").forEach(v => {
+      if (v.querySelector("iframe")) {
+        try { v._player && v._player.destroy(); } catch (e) {}
+        v._player = null;
+        v.innerHTML = coverHTML(byId[v.dataset.cid], +v.dataset.i);
+        const bar = v.nextElementSibling; if (bar) bar.querySelectorAll(".vbtn").forEach(b => b.classList.add("hidden"));
+      }
+    });
+  }
+  function refreshStart(bar) {
+    const c = byId[bar.dataset.cid], i = +bar.dataset.i;
+    document.querySelectorAll(`.vbar[data-cid="${c.id}"][data-i="${i}"] .vstart b`).forEach(b => b.textContent = fmt(startOf(c, i)));
+  }
   function cardFront(c, hideName) {
     const col = GENRES[c.genre].color;
     const chips = `<span class="chip main">${GENRES[c.genre].label}</span>` + c.also.map(a => `<span class="chip">${esc(a)}</span>`).join("");
@@ -103,8 +164,8 @@
     return `<div class="card-top"><span class="pad-type" style="--c:${col}">${c.type}</span><button class="x" data-close>✕</button></div>
       <div class="card-name">${hideName ? "???" : esc(c.name)}</div>
       <div class="card-aka">${hideName ? "" : "aka " + esc(c.aka)}</div>
-      ${playable ? `<button class="bigpad card-play" data-play><span class="ring"></span><span class="bp-label">▶ PLAY</span></button>`
-        : `<a class="ex" href="${yt(c.examples[0].artist + " " + c.examples[0].track)}" target="_blank" rel="noopener"><span class="yt">▶</span><span><b>Hear it on YouTube</b><small>${esc(c.examples[0].artist)} — ${esc(c.examples[0].track)}</small></span></a>`}
+      ${playable ? `<button class="bigpad card-play" data-play><span class="ring"></span><span class="bp-label">▶ PLAY</span></button>` : ""}
+      ${(!playable || c.showReal) ? `<div class="sec"><h3>${playable ? "Hear the real recording" : "Listen"} · ${esc(c.examples[0].artist)} — ${esc(c.examples[0].track)}</h3>${slotHTML(c, 0)}</div>` : ""}
       <div class="chips">${chips}</div>
       <div class="sec"><h3>What to listen for</h3><p class="listen">${esc(c.listen)}</p></div>
       <button class="flipbtn" data-flip>FLIP CARD ↻ &nbsp;plugins · tutorials · examples</button>`;
@@ -112,7 +173,8 @@
   function cardBack(c) {
     const col = GENRES[c.genre].color;
     const plugs = c.plugins.map(p => `<div class="plug"><span class="tag ${p.where}">${p.where === "FL" ? "FL" : "FREE"}</span><span><b>${esc(p.name)}</b><small>${esc(p.note)}</small></span></div>`).join("");
-    const ex = c.examples.map(e => `<a class="ex" href="${yt(e.artist + " " + e.track)}" target="_blank" rel="noopener"><span class="yt">▶</span><span><b>${esc(e.track)}</b><small>${esc(e.artist)}${e.year ? " · " + e.year : ""}${e.note ? " · " + esc(e.note) : ""}</small></span></a>`).join("");
+    const ex = c.examples.map((e, i) => `<div class="exrow"><button class="ex" data-expand="${i}"><span class="yt">▶</span><span><b>${esc(e.track)}</b><small>${esc(e.artist)}${e.year ? " · " + e.year : ""}${e.note ? " · " + esc(e.note) : ""}</small></span></button>
+      <div class="exslot hidden" data-slot="${i}">${slotHTML(c, i)}</div></div>`).join("");
     const tuts = c.tutorials.map(q => `<a class="tut" href="${yt(q)}" target="_blank" rel="noopener">${esc(q)}</a>`).join("");
     const chips = `<span class="chip main">${GENRES[c.genre].label}</span>` + c.also.map(a => `<span class="chip">${esc(a)}</span>`).join("");
     return `<div class="card-top"><span class="pad-type" style="--c:${col}">${esc(c.name)}</span><button class="x" data-close>✕</button></div>
@@ -133,11 +195,21 @@
     modal.dataset.id = c.id;
   }
   modal.addEventListener("click", e => {
-    if (e.target.closest("[data-close]")) { modal.classList.add("hidden"); SE.stop(); clearPlaying(); return; }
-    if (e.target.closest("[data-flip]")) { flip.classList.toggle("flipped"); return; }
-    const p = e.target.closest("[data-play]"); if (p) playCard(byId[modal.dataset.id], p);
+    if (e.target.closest("[data-close]")) { modal.classList.add("hidden"); SE.stop(); clearPlaying(); stopVideos(); return; }
+    const lv = e.target.closest("[data-loadvideo]"); if (lv) { loadVideo(lv.closest(".video")); return; }
+    const exb = e.target.closest("[data-expand]");
+    if (exb) { const slot = exb.parentElement.querySelector(".exslot"); const open = slot.classList.contains("hidden");
+      stopVideos(); document.querySelectorAll(".exslot").forEach(x => x.classList.add("hidden"));
+      if (open) { slot.classList.remove("hidden"); loadVideo(slot.querySelector(".video")); } return; }
+    const mk = e.target.closest("[data-mark]");
+    if (mk) { const bar = mk.closest(".vbar"), v = bar.previousElementSibling;
+      if (v._player && v._player.getCurrentTime) { store.set(startKey(bar.dataset.cid, bar.dataset.i), Math.floor(v._player.getCurrentTime())); refreshStart(bar); mk.textContent = "✓ Saved"; setTimeout(() => mk.textContent = "📍 Set start here", 1200); } return; }
+    const rs = e.target.closest("[data-reset]");
+    if (rs) { const bar = rs.closest(".vbar"); try { localStorage.removeItem(startKey(bar.dataset.cid, bar.dataset.i)); } catch (er) {} refreshStart(bar); return; }
+    if (e.target.closest("[data-flip]")) { stopVideos(); flip.classList.toggle("flipped"); return; }
+    const p = e.target.closest("[data-play]"); if (p) { stopVideos(); playCard(byId[modal.dataset.id], p); }
   });
-  document.addEventListener("keydown", e => { if (e.key === "Escape") modal.classList.add("hidden"); });
+  document.addEventListener("keydown", e => { if (e.key === "Escape") { modal.classList.add("hidden"); stopVideos(); } });
 
   // ---------- quiz ----------
   const ROUNDS = 10;
