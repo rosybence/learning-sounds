@@ -246,7 +246,7 @@ window.CARDS = [
   },
   {
     id: "organ", name: "Organ bass", aka: "M1 organ bass",
-    genre: "garage", also: ["Speed garage", "Bassline", "House"], type: "Bass",
+    genre: "garage", also: ["Speed garage", "Bassline / Niche", "House"], type: "Bass",
     listen: "A punchy, hollow, slightly 'boxy' bass made of organ tones, bouncing in short notes.",
     recipe: [
       "Stack sine/organ partials (fundamental + octave + higher harmonic) — the Korg M1 'Organ 2' preset is the classic.",
@@ -421,7 +421,7 @@ window.CARDS = [
   },
   {
     id: "acid", name: "303 acid squelch", aka: "Acid bass, TB-303",
-    genre: "electro", also: ["Acid house", "Acid techno"], type: "Bass",
+    genre: "acidhouse", also: ["Acid techno", "Electro"], type: "Bass",
     listen: "A rubbery, squelchy, chirping bassline whose resonant filter squeals and slides between notes.",
     recipe: [
       "One saw (or square) oscillator.",
@@ -488,7 +488,7 @@ window.CARDS = [
   },
   {
     id: "speedbass", name: "Speed garage bass", aka: "'Bwoing' bass, pitch-bend bass",
-    genre: "garage", also: ["Speed garage", "Bassline", "UK bass"], type: "Bass",
+    genre: "speedgarage", also: ["UK Garage", "Bassline", "UK bass"], type: "Bass",
     listen: "A fat, rubbery bass that drops in pitch at the start of each note — 'bwoing!' — over a four-to-the-floor house beat at about 130 BPM.",
     recipe: [
       "Detuned saw or Reese-style bass.",
@@ -641,6 +641,143 @@ window.CARDS = [
       { artist: "Hannah Diamond", track: "Every Night", year: 2014, yt: "EPFvbc4onks", t: 0 }
     ]
   }
+,
+  // ---------- bassline / niche ----------
+  {
+    id: "warpbass", name: "Bassline 'warp' bass", aka: "Niche bass, wobbly 4x4 bass",
+    genre: "bassline", also: ["Speed garage", "UK bass", "Bass house"], type: "Bass",
+    listen: "A loud, buzzy mid-range bass that wobbles and 'talks' in bouncy patterns over a four-to-the-floor beat at about 135–140 BPM. It's the star of the track.",
+    recipe: [
+      "Two detuned square/saw oscillators an octave apart.",
+      "Low-pass filter with resonance; an LFO (1/8 or 1/16) wobbles the cutoff.",
+      "Drive it hard so it cuts through on small speakers.",
+      "Bouncy, syncopated notes with octave jumps over a 4x4 kick with swung hats."
+    ],
+    plugins: [
+      { name: "3x Osc + Fruity Filter", where: "FL", note: "Square waves + LFO on cutoff" },
+      { name: "Vital", where: "Free", note: "Tempo-synced LFO → filter" },
+      { name: "Surge XT", where: "Free", note: "Drive + filter modulation" }
+    ],
+    inFL: true,
+    tutorials: ["how to make bassline house bass niche", "uk bassline wobble bass tutorial"],
+    examples: [
+      { artist: "DJ Q feat. MC Bonez", track: "You Wot!", year: 2008, yt: "39Kz5aZGb_k", t: 0 },
+      { artist: "T2", track: "Heartbroken", year: 2007, yt: "KG28976TmDM", t: 0 }
+    ]
+  },
+  // ---------- speed garage ----------
+  {
+    id: "sgbeat", name: "Speed garage beat", aka: "4x4 garage shuffle",
+    genre: "speedgarage", also: ["UK Garage", "Bassline", "House"], type: "Drums",
+    listen: "A steady four-to-the-floor kick at about 130–135 BPM, but with heavily swung, skippy hi-hats and rimshots that make it bounce — house drums with garage swing.",
+    recipe: [
+      "Kick on every beat (four-to-the-floor).",
+      "Claps or snares on 2 and 4.",
+      "Open hats on the off-beats; shuffled closed hats and rimshots with lots of swing (60–70%).",
+      "Leave room for a big bass."
+    ],
+    plugins: [
+      { name: "FPC", where: "FL", note: "Drum pads" },
+      { name: "Channel rack swing knob", where: "FL", note: "Push the swing up" }
+    ],
+    inFL: true,
+    tutorials: ["speed garage drums tutorial", "how to make speed garage fl studio"],
+    examples: [
+      { artist: "Double 99", track: "RIP Groove", year: 1997, yt: "uR3Vw8J8vUo", t: 0 },
+      { artist: "Sneaker Pimps", track: "Spin Spin Sugar (Armand's Dark Garage Mix)", year: 1996, yt: "XXE6nG7W9zs", t: 0 }
+    ]
+  },
+  {
+    id: "gunshot", name: "Gunshot & airhorn FX", aka: "Sound-system FX",
+    genre: "speedgarage", also: ["Jungle", "Dancehall", "Grime"], type: "FX",
+    listen: "A blaring 'BAAP BAAP BAAAAP' horn and booming gunshot effects — sound-system crowd-hype noises dropped in before or over the drop.",
+    recipe: [
+      "Airhorn: several saw waves a few notes apart, short pitch dip, played in a 'baap-baap-baaap' rhythm.",
+      "Gunshot: a burst of noise with a low thump, then a big reverb tail.",
+      "Use sparingly as hype FX before drops.",
+      "Free CC0 versions exist on Freesound."
+    ],
+    plugins: [
+      { name: "3x Osc", where: "FL", note: "Stacked saws for the horn" },
+      { name: "Fruity Reeverb 2", where: "FL", note: "Huge tail for the gunshot" },
+      { name: "Freesound.org (CC0)", where: "Free", note: "Ready-made FX samples" }
+    ],
+    inFL: true,
+    tutorials: ["how to make airhorn sound synth", "dub siren airhorn fx tutorial"],
+    examples: [
+      { artist: "187 Lockdown", track: "Gunman", year: 1997, yt: "clnEkzPF_4Y", t: 0 },
+      { artist: "Double 99", track: "RIP Groove", year: 1997, yt: "uR3Vw8J8vUo", t: 0 }
+    ]
+  },
+  // ---------- acid house ----------
+  {
+    id: "house909", name: "909 house groove", aka: "TR-909 / jack beat",
+    genre: "acidhouse", also: ["Chicago house", "Techno"], type: "Drums",
+    listen: "Punchy four-to-the-floor kicks, sizzling open hi-hats on the off-beats and crisp claps — the classic Chicago 'jack' groove at about 120–125 BPM.",
+    recipe: [
+      "Roland TR-909 (or 808/707) style kit.",
+      "Kick on every beat, clap on 2 and 4.",
+      "Open hat on every off-beat, closed hats in 16ths.",
+      "Add a little swing and accents for the 'jack'."
+    ],
+    plugins: [
+      { name: "FL Studio 909 samples", where: "FL", note: "Packs → Drums" },
+      { name: "FPC", where: "FL", note: "Drum pads" },
+      { name: "Fruity DrumSynth Live", where: "FL", note: "Synthesise kicks/hats" }
+    ],
+    inFL: true,
+    tutorials: ["how to make acid house drums 909", "chicago house beat tutorial"],
+    examples: [
+      { artist: "Marshall Jefferson", track: "Move Your Body (The House Music Anthem)", year: 1986, yt: "RhKMMh4qOL8", t: 0 },
+      { artist: "Phuture", track: "Acid Tracks", year: 1987, yt: "yKHGv6Es610", t: 0 }
+    ]
+  },
+  // ---------- acid techno ----------
+  {
+    id: "distort303", name: "Distorted 303", aka: "Acid techno 303, screaming acid",
+    genre: "acidtechno", also: ["Acid house", "Hard techno", "Free party"], type: "Bass",
+    listen: "A 303 line pushed through heavy distortion so it screams and snarls, faster (≈140 BPM) and harder than acid house, over pounding kicks.",
+    recipe: [
+      "Start with a 303-style line (saw, resonant low-pass, accents, slides).",
+      "Max the resonance and push it into heavy distortion.",
+      "Slowly sweep the cutoff up over several bars so it builds into a scream.",
+      "Hard, distorted 909 kicks at 135–145 BPM."
+    ],
+    plugins: [
+      { name: "Open303 / JC-303", where: "Free", note: "Free 303 emulations" },
+      { name: "Fruity Blood Overdrive", where: "FL", note: "Distortion" },
+      { name: "Vital", where: "Free", note: "Resonant filter + drive" }
+    ],
+    inFL: true,
+    tutorials: ["acid techno 303 distortion tutorial", "how to make acid techno"],
+    examples: [
+      { artist: "Josh Wink", track: "Higher State of Consciousness", year: 1995, yt: "d3hAnAnJwyU", t: 0 },
+      { artist: "Lochi", track: "London Acid City", year: 1996, yt: "01WzJVQkU9o", t: 0 }
+    ]
+  },
+  // ---------- dub techno ----------
+  {
+    id: "dubchord", name: "Dub techno chord", aka: "Basic Channel chord, echo stab",
+    genre: "dubtechno", also: ["Minimal", "Deep techno", "Dub"], type: "Synth",
+    listen: "A soft, muffled minor chord stab that echoes over and over into a hazy cloud, slowly opening and closing, over a gentle steady kick and hiss.",
+    recipe: [
+      "A minor 7th chord with a short, plucky envelope.",
+      "Band-pass or low-pass filter it so it's muffled; slowly automate the cutoff.",
+      "Send it into a long feedback delay (3/16 or dotted 8th) and lots of reverb.",
+      "Add tape hiss and a soft, deep kick at about 118–125 BPM."
+    ],
+    plugins: [
+      { name: "3x Osc / FL Keys", where: "FL", note: "Simple chord source" },
+      { name: "Fruity Delay 3 + Fruity Reeverb 2", where: "FL", note: "Long echoes and space" },
+      { name: "Vital", where: "Free", note: "Chord pluck patch" }
+    ],
+    inFL: true,
+    tutorials: ["how to make dub techno chords", "basic channel style tutorial"],
+    examples: [
+      { artist: "Basic Channel", track: "Quadrant Dub I", year: 1994, yt: "APH42GVgUTM", t: 0 },
+      { artist: "Rhythm & Sound", track: "Mango Drive", year: 1998, yt: "yKd-S9hLlgY", t: 0 }
+    ]
+  }
 
 ];
 
@@ -649,5 +786,10 @@ window.GENRES = {
   dubstep: { label: "UK Dubstep", color: "#a46bff" },
   garage: { label: "UK Garage", color: "#18e0c8" },
   electro: { label: "Electro", color: "#ff3d8b" },
-  hyperpop: { label: "Hyperpop", color: "#4da3ff" }
+  hyperpop: { label: "Hyperpop", color: "#4da3ff" },
+  bassline: { label: "Bassline / Niche", color: "#ffe14d" },
+  speedgarage: { label: "Speed Garage", color: "#ff4d4d" },
+  acidhouse: { label: "Acid House", color: "#c8ff3d" },
+  acidtechno: { label: "Acid Techno", color: "#c0c7d6" },
+  dubtechno: { label: "Dub Techno", color: "#6fbf73" }
 };

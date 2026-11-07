@@ -251,7 +251,8 @@
       const same = others.filter(c => c.type === card.type), rest = others.filter(c => c.type !== card.type);
       opts = shuffle([card, ...[...same, ...rest].slice(0, 3)]).map(c => ({ label: c.name, ok: c.id === card.id }));
     } else {
-      opts = Object.entries(GENRES).map(([k, v]) => ({ label: v.label, ok: k === card.genre }));
+      const wrong = shuffle(Object.keys(GENRES).filter(k => k !== card.genre)).slice(0, 3);
+      opts = shuffle([card.genre, ...wrong]).map(k => ({ label: GENRES[k].label, ok: k === card.genre }));
     }
     $("#qOptions").innerHTML = opts.map((o, k) => `<button class="opt" data-ok="${o.ok}"><span class="key">${"ABCDE"[k]}</span>${esc(o.label)}</button>`).join("");
     $("#qOptions").querySelectorAll(".opt").forEach(b => b.addEventListener("click", () => answer(b)));

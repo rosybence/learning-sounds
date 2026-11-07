@@ -655,6 +655,117 @@
     return time - t + 0.8;
   };
 
+
+  // ---------- bassline / speed garage / acid / dub techno ----------
+  R.warpbass = (ac, out, t) => {
+    const st = 60 / 138 / 4, dur = 32 * st, sw = st * 0.3;
+    const at = i => t + i * st + (i % 2 ? sw : 0);
+    for (let i = 0; i < 32; i += 4) kick(ac, out, at(i), { vol: 0.85, decay: 0.25 });
+    [4, 12, 20, 28].forEach(i => clap(ac, out, at(i), 0.4));
+    for (let i = 2; i < 32; i += 4) hat(ac, out, at(i), { open: true, vol: 0.11 });
+    for (let i = 1; i < 32; i += 2) hat(ac, out, at(i), { vol: 0.07 });
+    const lp = ac.createBiquadFilter(); lp.type = "lowpass"; lp.Q.value = 10; lp.frequency.value = 900;
+    const lfo = ac.createOscillator(); lfo.frequency.value = 138 / 60 * 2; const dep = ac.createGain(); dep.gain.value = 700;
+    lfo.connect(dep); dep.connect(lp.frequency); lfo.start(t); lfo.stop(t + dur);
+    const g = ac.createGain(); g.gain.value = 0.0001; lp.connect(g); g.connect(drive(ac, gainNode(ac, out, 0.8), 3));
+    const o1 = osc(ac, "square", midi(41), lp, t, t + dur, -8), o2 = osc(ac, "sawtooth", midi(53), lp, t, t + dur, 8);
+    const pat = [[2, 41, 2], [5, 41, 1], [6, 53, 2], [10, 44, 1], [11, 46, 3], [14, 48, 2], [18, 41, 2], [21, 41, 1], [22, 53, 2], [26, 39, 2], [28, 51, 1], [29, 39, 3]];
+    pat.forEach(([i, n, l]) => {
+      const s0 = at(i), e0 = s0 + l * st * 0.95;
+      o1.frequency.setValueAtTime(midi(n), s0); o2.frequency.setValueAtTime(midi(n + 12), s0);
+      g.gain.setValueAtTime(0.0001, s0); g.gain.exponentialRampToValueAtTime(0.28, s0 + 0.006); g.gain.setValueAtTime(0.28, e0 - 0.02); g.gain.exponentialRampToValueAtTime(0.0001, e0);
+      if (l >= 2) lfo.frequency.setValueAtTime(138 / 60 * 4, s0); else lfo.frequency.setValueAtTime(138 / 60 * 2, s0);
+    });
+    return dur + 0.3;
+  };
+
+  R.sgbeat = (ac, out, t) => {
+    const st = 60 / 132 / 4, sw = st * 0.38;
+    const at = i => t + i * st + (i % 2 ? sw : 0);
+    for (let i = 0; i < 32; i += 4) kick(ac, out, at(i), { vol: 0.95, decay: 0.3 });
+    [4, 12, 20, 28].forEach(i => { clap(ac, out, at(i), 0.45); snare(ac, out, at(i), { vol: 0.4, tone: 230 }); });
+    for (let i = 2; i < 32; i += 4) hat(ac, out, at(i), { open: true, vol: 0.16 });
+    for (let i = 0; i < 32; i++) if (i % 4 !== 2) hat(ac, out, at(i), { vol: i % 2 ? 0.1 : 0.06 });
+    [3, 7, 14, 19, 23, 27, 30].forEach(i => rim(ac, out, at(i), 0.22));
+    // simple sub to fill it out
+    [[0, 33], [8, 33], [16, 31], [24, 36]].forEach(([i, n]) => { const g = ac.createGain(); const s0 = at(i); env(g.gain, s0, 0.35, 0.01, 0.1, 0.3, s0 + 7 * st); g.connect(out); osc(ac, "sine", midi(n), g, s0, s0 + 7 * st + 0.05); });
+    return 32 * st + 0.3;
+  };
+
+  function airhorn(ac, out, st, len) {
+    const g = ac.createGain(); env(g.gain, st, 0.1, 0.01, 0.05, 0.09, st + len); 
+    const bp = ac.createBiquadFilter(); bp.type = "bandpass"; bp.frequency.value = 1400; bp.Q.value = 0.8;
+    bp.connect(g); g.connect(drive(ac, out, 2));
+    [0, 4, 7, 10].forEach(iv => { const o = osc(ac, "sawtooth", midi(64 + iv), bp, st, st + len + 0.05, iv * 3);
+      o.frequency.setValueAtTime(midi(64 + iv) * 0.94, st); o.frequency.exponentialRampToValueAtTime(midi(64 + iv), st + 0.06); });
+  }
+  function gunshot(ac, out, st) {
+    const n = noise(ac); const g = ac.createGain(); env(g.gain, st, 0.9, 0.001, 0.18);
+    const lp = ac.createBiquadFilter(); lp.type = "lowpass"; lp.frequency.setValueAtTime(6000, st); lp.frequency.exponentialRampToValueAtTime(400, st + 0.3);
+    n.connect(lp); lp.connect(g); g.connect(out); n.start(st, Math.random()); n.stop(st + 0.4);
+    kick(ac, out, st, { f0: 120, f1: 40, decay: 0.5, vol: 0.9, click: false });
+  }
+  R.gunshot = (ac, out, t) => {
+    const bus = reverb(ac, out, 3, 0.5);
+    airhorn(ac, bus, t, 0.18); airhorn(ac, bus, t + 0.28, 0.18); airhorn(ac, bus, t + 0.56, 0.7);
+    gunshot(ac, bus, t + 1.6); gunshot(ac, bus, t + 2.1);
+    return 4.6;
+  };
+
+  R.house909 = (ac, out, t) => {
+    const st = 60 / 124 / 4, sw = st * 0.12;
+    const at = i => t + i * st + (i % 2 ? sw : 0);
+    for (let i = 0; i < 32; i += 4) kick(ac, out, at(i), { f0: 180, f1: 52, pitchTime: 0.05, decay: 0.32, vol: 1 });
+    [4, 12, 20, 28].forEach(i => clap(ac, out, at(i), 0.6));
+    for (let i = 2; i < 32; i += 4) hat(ac, out, at(i), { open: true, vol: 0.2, freq: 8000 });
+    for (let i = 0; i < 32; i++) if (i % 4 !== 2) hat(ac, out, at(i), { vol: i % 4 === 0 ? 0.05 : 0.1, freq: 9000 });
+    // a simple jacking bassline
+    [[0, 36], [3, 36], [6, 48], [8, 39], [11, 36], [14, 46], [16, 36], [19, 36], [22, 48], [24, 41], [27, 39], [30, 43]].forEach(([i, n]) => {
+      const s0 = at(i), g = ac.createGain(); env(g.gain, s0, 0.3, 0.004, st * 1.4); const f = ac.createBiquadFilter(); f.type = "lowpass"; f.frequency.value = 700; f.Q.value = 4;
+      g.connect(f); f.connect(out); osc(ac, "sawtooth", midi(n), g, s0, s0 + st * 2);
+    });
+    return 32 * st + 0.4;
+  };
+
+  R.distort303 = (ac, out, t) => {
+    const st = 60 / 142 / 4, steps = 32, dur = steps * st;
+    const lp = ac.createBiquadFilter(); lp.type = "lowpass"; lp.Q.value = 22;
+    const g = ac.createGain(); g.gain.value = 0.0001;
+    lp.connect(g); g.connect(drive(ac, gainNode(ac, out, 0.55), 7));
+    const o = osc(ac, "sawtooth", midi(40), lp, t, t + dur + 0.1);
+    const pat = [[40, 1, 0], [40, 0, 0], [52, 0, 1], [40, 0, 0], [43, 1, 0], [40, 0, 1], [55, 0, 0], [40, 0, 0],
+                 [40, 1, 0], [38, 0, 0], [50, 0, 1], [40, 0, 0], [52, 1, 0], [40, 0, 1], [43, 0, 0], [47, 1, 0]];
+    for (let i = 0; i < steps; i++) {
+      const [n, acc, slide] = pat[i % 16], s0 = t + i * st, sweep = 500 + 4000 * (i / steps);
+      if (slide) o.frequency.setTargetAtTime(midi(n), s0, 0.03); else o.frequency.setValueAtTime(midi(n), s0);
+      g.gain.setTargetAtTime(acc ? 0.34 : 0.24, s0, 0.003); g.gain.setTargetAtTime(0.14, s0 + st * 0.6, 0.02);
+      lp.frequency.setValueAtTime(sweep * (acc ? 2 : 1.4), s0); lp.frequency.exponentialRampToValueAtTime(Math.max(220, sweep * 0.4), s0 + st * 0.9);
+    }
+    g.gain.setTargetAtTime(0.0001, t + dur, 0.02);
+    const kb = drive(ac, gainNode(ac, out, 0.8), 3);
+    for (let i = 0; i < steps; i += 4) kick(ac, kb, t + i * st, { f0: 200, f1: 50, pitchTime: 0.04, decay: 0.3, vol: 1 });
+    for (let i = 2; i < steps; i += 4) hat(ac, out, t + i * st, { open: true, vol: 0.14 });
+    return dur + 0.3;
+  };
+
+  R.dubchord = (ac, out, t) => {
+    const st = 60 / 120 / 4, dur = 32 * st;
+    const echo = delay(ac, reverb(ac, out, 3, 0.45), st * 3, 0.72, 1400, 0.7);
+    // tape hiss
+    const n = noise(ac); const hp = ac.createBiquadFilter(); hp.type = "highpass"; hp.frequency.value = 5000;
+    const hg = gainNode(ac, out, 0.02); n.connect(hp); hp.connect(hg); n.start(t); n.stop(t + dur + 2);
+    for (let i = 0; i < 32; i += 4) { const lp = ac.createBiquadFilter(); lp.type = "lowpass"; lp.frequency.value = 900; lp.connect(out); kick(ac, lp, t + i * st, { f0: 110, f1: 45, decay: 0.45, vol: 0.9, click: false }); }
+    for (let i = 2; i < 32; i += 4) hat(ac, out, t + i * st, { vol: 0.05, freq: 7000 });
+    const hits = [2, 7, 10, 18, 23, 26];
+    hits.forEach((i, k) => {
+      const s0 = t + i * st;
+      const bp = ac.createBiquadFilter(); bp.type = "bandpass"; bp.Q.value = 1.4; bp.frequency.value = 500 + k * 180; // slowly opening
+      const g = ac.createGain(); env(g.gain, s0, 0.12, 0.003, 0.16); bp.connect(g); g.connect(echo);
+      [50, 53, 57, 60].forEach(nn => osc(ac, "sawtooth", midi(nn), bp, s0, s0 + 0.25, (nn % 2) * 6 - 3));
+    });
+    return dur + 2.5;
+  };
+
   // ---------- public API ----------
   function stop() {
     if (current) { const g = current; g.gain.setTargetAtTime(0.0001, ctx.currentTime, 0.03); setTimeout(() => g.disconnect(), 300); current = null; }
