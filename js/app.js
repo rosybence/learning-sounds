@@ -249,12 +249,12 @@
       const others = shuffle(CARDS.filter(c => c.id !== card.id));
       // prefer distractors of the same type so it's a real test
       const same = others.filter(c => c.type === card.type), rest = others.filter(c => c.type !== card.type);
-      opts = shuffle([card, ...[...same, ...rest].slice(0, 3)]).map(c => ({ label: c.name, ok: c.id === card.id }));
+      opts = shuffle([card, ...[...same, ...rest].slice(0, 3)]).map(c => ({ label: c.name, ok: c.id === card.id, key: c.id }));
     } else {
       const wrong = shuffle(Object.keys(GENRES).filter(k => k !== card.genre)).slice(0, 3);
-      opts = shuffle([card.genre, ...wrong]).map(k => ({ label: GENRES[k].label, ok: k === card.genre }));
+      opts = shuffle([card.genre, ...wrong]).map(k => ({ label: GENRES[k].label, ok: k === card.genre, key: k }));
     }
-    $("#qOptions").innerHTML = opts.map((o, k) => `<button class="opt" data-ok="${o.ok}"><span class="key">${"ABCDE"[k]}</span>${esc(o.label)}</button>`).join("");
+    $("#qOptions").innerHTML = opts.map((o, k) => `<button class="opt" data-ok="${o.ok}" data-key="${o.key}"><span class="key">${"ABCDE"[k]}</span>${esc(o.label)}</button>`).join("");
     $("#qOptions").querySelectorAll(".opt").forEach(b => b.addEventListener("click", () => answer(b)));
     $("#qReveal").classList.add("hidden"); $("#qNext").classList.add("hidden");
     setNow(`Q${q.i + 1} · ???`);
@@ -263,6 +263,21 @@
   function playQ() { playCard(q.card, $("#qPlay"), `Q${q.i + 1} · ???`); }
   $("#qPlay").addEventListener("click", playQ);
   $("#qClue").addEventListener("click", e => { const lv = e.target.closest("[data-loadvideo]"); if (lv) loadVideo(lv.closest(".video")); });
+  function contrastHTML(card, key) {
+    if (q.kind === "genre") {
+      const gi = window.GENRE_INFO || {};
+      return `<div class="contrast"><div class="ct-head">${esc(GENRES[key].label)} vs ${esc(GENRES[card.genre].label)}</div>
+        <p><b style="color:${GENRES[key].color}">${esc(GENRES[key].label)}:</b> ${esc(gi[key] || "")}</p>
+        <p><b style="color:${GENRES[card.genre].color}">${esc(GENRES[card.genre].label)}:</b> ${esc(gi[card.genre] || "")}</p></div>`;
+    }
+    const other = byId[key]; if (!other) return "";
+    const pair = [card.id, other.id].sort().join("|");
+    const note = (window.CONTRASTS || {})[pair];
+    const ab = c => SE.has(c.id) ? `<button class="abbtn" data-ab="${c.id}" style="--c:${GENRES[c.genre].color}">▶ ${esc(c.name)}</button>` : "";
+    return `<div class="contrast"><div class="ct-head">You picked ${esc(other.name)} · how to tell them apart</div>
+      ${note ? `<p>${esc(note)}</p>` : `<p><b>${esc(other.name)}</b> is different: ${esc(other.listen)}</p>`}
+      ${SE.has(other.id) || SE.has(card.id) ? `<p class="abhint">Listen to both back to back:</p>` : ""}<div class="abrow">${ab(other)}${ab(card)}</div></div>`;
+  }
   function answer(btn) {
     const ok = btn.dataset.ok === "true", card = q.card;
     $("#qOptions").querySelectorAll(".opt").forEach(b => { b.disabled = true; if (b.dataset.ok === "true") b.classList.add("correct"); });
@@ -272,9 +287,11 @@
     $("#qReveal").innerHTML = `<div class="verdict ${ok ? "good" : "bad"}">${ok ? "Nailed it." : "Not quite."}</div>
       <p><b style="color:var(--text)">${esc(card.name)}</b> · ${GENRES[card.genre].label}${card.also.length ? " (also " + card.also.slice(0, 2).map(esc).join(", ") + ")" : ""}</p>
       <p>${esc(card.listen)}</p>
+      ${ok ? "" : contrastHTML(card, btn.dataset.key)}
       <button class="linkbtn" id="qOpen">Open full card ↻</button>`;
     $("#qReveal").classList.remove("hidden");
     $("#qOpen").addEventListener("click", () => openCard(card));
+    $("#qReveal").querySelectorAll("[data-ab]").forEach(b => b.addEventListener("click", () => { stopVideos(); playCard(byId[b.dataset.ab], b, b.dataset.ab === card.id ? card.name.toUpperCase() : byId[b.dataset.ab].name.toUpperCase()); }));
     $("#qNext").textContent = q.i + 1 < ROUNDS ? "NEXT ▸" : "SEE SCORE ▸";
     $("#qNext").classList.remove("hidden");
   }
