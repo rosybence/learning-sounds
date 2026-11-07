@@ -64,7 +64,7 @@
   document.querySelectorAll(".tbtn[data-view]").forEach(b => b.addEventListener("click", () => {
     document.querySelectorAll(".tbtn[data-view]").forEach(x => x.classList.toggle("active", x === b));
     document.querySelectorAll(".view").forEach(v => v.classList.toggle("active", v.id === "view-" + b.dataset.view));
-    SE.stop(); clearPlaying();
+    SE.stop(); clearPlaying(); stopVideos();
     if (b.dataset.view === "quiz") showSetup();
   }));
 
@@ -243,7 +243,7 @@
     const playable = SE.has(card.id);
     $("#qPlay").classList.toggle("hidden", !playable);
     $("#qClue").classList.toggle("hidden", playable);
-    if (!playable) $("#qClue").innerHTML = "<b>Recorded sound — clue:</b> " + esc(redact(card.listen, card));
+    if (!playable) $("#qClue").innerHTML = `<p class="qnote">This sound is a recording, so it plays from a real track. The video shows the track name, not the sound's name.</p>${slotHTML(card, 0)}`;
     let opts;
     if (kind === "name") {
       const others = shuffle(CARDS.filter(c => c.id !== card.id));
@@ -261,6 +261,7 @@
   }
   function playQ() { playCard(q.card, $("#qPlay"), `Q${q.i + 1} · ???`); }
   $("#qPlay").addEventListener("click", playQ);
+  $("#qClue").addEventListener("click", e => { const lv = e.target.closest("[data-loadvideo]"); if (lv) loadVideo(lv.closest(".video")); });
   function answer(btn) {
     const ok = btn.dataset.ok === "true", card = q.card;
     $("#qOptions").querySelectorAll(".opt").forEach(b => { b.disabled = true; if (b.dataset.ok === "true") b.classList.add("correct"); });
@@ -277,7 +278,7 @@
     $("#qNext").classList.remove("hidden");
   }
   $("#qNext").addEventListener("click", () => {
-    SE.stop(); clearPlaying();
+    SE.stop(); clearPlaying(); stopVideos();
     q.i++;
     if (q.i < ROUNDS) nextQuestion(); else endQuiz();
   });
