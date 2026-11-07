@@ -440,12 +440,214 @@ window.CARDS = [
       { artist: "Phuture", track: "Acid Tracks", year: 1987, yt: "yKHGv6Es610", t: 0 },
       { artist: "Hardfloor", track: "Acperience 1", year: 1992, yt: "Un4CeV_l3pI", t: 0 }
     ]
+  },
+  // ---------- more bass ----------
+  {
+    id: "neuro", name: "Neuro bass", aka: "Neurofunk bass, techstep bass",
+    genre: "jungle", also: ["Drum & bass", "Neurofunk", "Techstep"], type: "Bass",
+    listen: "A gnarly, metallic mid-range bass at drum & bass speed (≈172 BPM) that snarls and shifts tone on every note, over a fast two-step beat.",
+    recipe: [
+      "Start with a detuned saw (a Reese) or an FM patch.",
+      "Push it through heavy distortion, then a band-pass or comb filter.",
+      "Automate the filter quickly on every note so the tone keeps moving.",
+      "Layer a clean sine sub underneath so the low end stays solid."
+    ],
+    plugins: [
+      { name: "Vital", where: "Free", note: "FM + distortion + filter envelopes" },
+      { name: "Surge XT", where: "Free", note: "Comb filters and waveshapers" },
+      { name: "Fruity Blood Overdrive / Distructor", where: "FL", note: "Distortion in FL" }
+    ],
+    inFL: false,
+    tutorials: ["how to make neuro bass vital", "neurofunk bass tutorial"],
+    examples: [
+      { artist: "Ed Rush & Optical", track: "Wormhole", year: 1998, yt: "Rt0I6LrbhLM", t: 0 },
+      { artist: "Noisia", track: "Machine Gun", year: 2010, yt: "pBlu0Sbj6Ao", t: 0 }
+    ]
+  },
+  {
+    id: "growl", name: "Growl bass", aka: "Talking bass, FM growl",
+    genre: "dubstep", also: ["Brostep", "Riddim"], type: "Bass",
+    listen: "A bass that sounds like it's growling or saying 'yow-wow' — the vowel shape changes as the note plays. Mid-range and aggressive.",
+    recipe: [
+      "FM synthesis: one oscillator modulates another's pitch to make harsh harmonics.",
+      "Automate the FM amount and a formant/vowel filter through each note.",
+      "Add distortion and OTT-style multiband compression.",
+      "Write it in short, rhythmic hits at 140–150 BPM."
+    ],
+    plugins: [
+      { name: "Vital", where: "Free", note: "FM between oscillators + formant filter" },
+      { name: "Surge XT", where: "Free", note: "FM and vowel filters" },
+      { name: "Sytrus", where: "FL", note: "FM synth, Producer Edition and up" }
+    ],
+    inFL: false,
+    tutorials: ["how to make growl bass vital", "fm growl bass tutorial"],
+    examples: [
+      { artist: "Doctor P", track: "Sweet Shop", year: 2010, yt: "InSKw4awJ2k", t: 0 },
+      { artist: "Flux Pavilion", track: "Bass Cannon", year: 2011, yt: "Htm_956k5ps", t: 0 }
+    ]
+  },
+  {
+    id: "speedbass", name: "Speed garage bass", aka: "'Bwoing' bass, pitch-bend bass",
+    genre: "garage", also: ["Speed garage", "Bassline", "UK bass"], type: "Bass",
+    listen: "A fat, rubbery bass that drops in pitch at the start of each note — 'bwoing!' — over a four-to-the-floor house beat at about 130 BPM.",
+    recipe: [
+      "Detuned saw or Reese-style bass.",
+      "Add a fast pitch envelope: each note starts high and dives down to the right note.",
+      "Low-pass filter with an envelope for the 'wow' shape.",
+      "Four-to-the-floor kick, shuffled hats, and lots of sidechain."
+    ],
+    plugins: [
+      { name: "3x Osc", where: "FL", note: "Use the pitch envelope in the channel's INS tab" },
+      { name: "Vital", where: "Free", note: "Envelope → pitch" },
+      { name: "Surge XT", where: "Free", note: "Pitch envelope + unison" }
+    ],
+    inFL: true,
+    tutorials: ["speed garage bass tutorial", "armand van helden bass sound how to"],
+    examples: [
+      { artist: "Sneaker Pimps", track: "Spin Spin Sugar (Armand's Dark Garage Mix)", year: 1996, yt: "XXE6nG7W9zs", t: 0 },
+      { artist: "187 Lockdown", track: "Gunman", year: 1997, yt: "clnEkzPF_4Y", t: 0 }
+    ]
+  },
+  {
+    id: "electrobass", name: "Electro synth bass", aka: "Sequenced analog bass",
+    genre: "electro", also: ["Detroit techno", "Electro-funk"], type: "Bass",
+    listen: "A tight, funky, sequenced synth bass — short, punchy notes bouncing in 16ths over 808 drums.",
+    recipe: [
+      "One square or saw oscillator (classic: Roland SH-101 or Moog).",
+      "Short, punchy envelope; low-pass filter with a little resonance.",
+      "Program a syncopated 16th-note line with octave jumps.",
+      "Keep the drums 808-based and robotic."
+    ],
+    plugins: [
+      { name: "3x Osc", where: "FL", note: "Square wave + short envelope" },
+      { name: "Vital", where: "Free", note: "Mono, short envelope" },
+      { name: "Surge XT", where: "Free", note: "Analog-style patches" }
+    ],
+    inFL: true,
+    tutorials: ["how to make electro bassline", "detroit electro bass synth tutorial"],
+    examples: [
+      { artist: "Cybotron", track: "Clear", year: 1983, yt: "Unc8kDUzbU8", t: 0 },
+      { artist: "Model 500", track: "No UFO's", year: 1985, yt: "xcdOBLH_AXs", t: 0 }
+    ]
+  },
+  // ---------- hyperpop ----------
+  {
+    id: "hyper808", name: "Blown-out 808", aka: "Distorted 808, clipped 808",
+    genre: "hyperpop", also: ["Trap", "Rage", "Bubblegum bass"], type: "Bass",
+    listen: "A huge 808 bass that's been distorted until it buzzes and crackles, gliding between notes, under fast hi-hat rolls.",
+    recipe: [
+      "Start with a long 808 (sine with a pitch drop).",
+      "Glide (portamento) between notes.",
+      "Distort/clip it hard so it buzzes even on phone speakers.",
+      "Add fast hi-hat rolls (1/16 and 1/32 triplets) at 140–160 BPM."
+    ],
+    plugins: [
+      { name: "FL 808 samples + Fruity Slide", where: "FL", note: "Use slide notes for glides" },
+      { name: "Fruity Soft Clipper / Distructor", where: "FL", note: "Clip it hard" },
+      { name: "Vital", where: "Free", note: "Sine + pitch env + distortion" }
+    ],
+    inFL: true,
+    tutorials: ["how to make distorted 808 hyperpop", "100 gecs 808 tutorial"],
+    examples: [
+      { artist: "100 gecs", track: "money machine", year: 2019, yt: "z97qLNXeAMQ", t: 0 },
+      { artist: "Charli XCX", track: "Vroom Vroom", year: 2016, yt: "qfAqtFuGjWM", t: 0 }
+    ]
+  },
+  {
+    id: "supersaw", name: "Supersaw lead", aka: "Trance saw, euphoric saw",
+    genre: "hyperpop", also: ["Trance", "Happy hardcore", "EDM"], type: "Synth",
+    listen: "A massive, bright, shimmering wall of saw waves playing euphoric chords — like trance turned up to max.",
+    recipe: [
+      "7+ sawtooth voices, widely detuned (unison) and spread in stereo.",
+      "Bright filter, long-ish release, lots of reverb.",
+      "Play big major chords or a fast arpeggio.",
+      "Heavy sidechain pumping to the kick."
+    ],
+    plugins: [
+      { name: "Vital", where: "Free", note: "Unison 7–16 voices, detune up" },
+      { name: "Surge XT", where: "Free", note: "Supersaw-style oscillators" },
+      { name: "3x Osc", where: "FL", note: "Stack detuned saws" }
+    ],
+    inFL: true,
+    tutorials: ["how to make supersaw vital", "hyperpop synth tutorial"],
+    examples: [
+      { artist: "100 gecs", track: "ringtone", year: 2019, yt: "_jg8vs4jmfA", t: 0 },
+      { artist: "A. G. Cook", track: "Beautiful", year: 2014, yt: "YG0ggHM1PLM", t: 0 }
+    ]
+  },
+  {
+    id: "bubblepluck", name: "Bubbly metallic pluck", aka: "SOPHIE pluck, latex sound",
+    genre: "hyperpop", also: ["Bubblegum bass", "PC Music"], type: "Synth",
+    listen: "Shiny, rubbery, bouncy 'bloop' and 'tink' sounds — like plastic, bubbles or squeaky latex — playing short, playful melodies.",
+    recipe: [
+      "FM synthesis with a non-integer ratio (e.g. 3.5:1) gives metallic, bell-like tones.",
+      "Very fast decay on the FM amount makes the 'bloop'.",
+      "Add pitch envelopes for rubbery, bouncy movement.",
+      "Keep everything very clean and very loud."
+    ],
+    plugins: [
+      { name: "Vital", where: "Free", note: "FM + pitch envelopes" },
+      { name: "Sytrus", where: "FL", note: "FM synth, Producer Edition and up" },
+      { name: "Surge XT", where: "Free", note: "FM2/FM3 oscillators" }
+    ],
+    inFL: false,
+    tutorials: ["how to make sophie sounds", "fm pluck bell vital tutorial"],
+    examples: [
+      { artist: "SOPHIE", track: "BIPP", year: 2013, yt: "MVc3Z-bG6Eo", t: 0 },
+      { artist: "SOPHIE", track: "LEMONADE", year: 2014, yt: "LdLvp630plc", t: 0 }
+    ]
+  },
+  {
+    id: "glitch", name: "Glitch stutter", aka: "Stutter edit, buffer repeat",
+    genre: "hyperpop", also: ["Glitch", "IDM", "Breakcore"], type: "FX",
+    listen: "The music suddenly chops into rapid repeats that speed up and rise in pitch — like a CD skipping — often with crunchy bitcrushing.",
+    recipe: [
+      "Take a short slice of audio and repeat it faster and faster (1/8 → 1/16 → 1/32).",
+      "Pitch it up as it speeds up for a 'rising' stutter.",
+      "Add a bitcrusher for crunch.",
+      "Use it as a fill just before a drop."
+    ],
+    plugins: [
+      { name: "Gross Beat", where: "FL", note: "Stutters and repeats (Signature+)" },
+      { name: "Fruity Squeeze / Fruity Slicer", where: "FL", note: "Bitcrush and slice" },
+      { name: "dBlue Glitch", where: "Free", note: "Classic free glitch plugin" }
+    ],
+    inFL: true,
+    tutorials: ["stutter glitch effect fl studio", "hyperpop glitch transitions"],
+    examples: [
+      { artist: "SOPHIE", track: "Immaterial", year: 2018, yt: "PB5tnokRFS0", t: 0 },
+      { artist: "100 gecs", track: "ringtone", year: 2019, yt: "_jg8vs4jmfA", t: 0 }
+    ]
+  },
+  {
+    id: "chipmunk", name: "Pitched-up autotune vocal", aka: "Chipmunk vocal, hard-tuned vocal",
+    genre: "hyperpop", also: ["Bubblegum bass", "Nightcore", "Emo rap"], type: "Vocal",
+    listen: "A singer pitched way up with hard, robotic autotune so the notes snap between pitches — cute, cartoonish and glossy.",
+    recipe: [
+      "Record or take a vocal.",
+      "Pitch it up 3–12 semitones (with or without formant shift).",
+      "Hard autotune: fastest retune speed so it snaps between notes.",
+      "Lots of doubling, reverb and brightness. This is a recording, so the card plays a real example."
+    ],
+    plugins: [
+      { name: "Pitcher / Newtone", where: "FL", note: "Hard tuning (Producer/Signature)" },
+      { name: "MAutoPitch (MeldaProduction)", where: "Free", note: "Free autotune" },
+      { name: "GSnap", where: "Free", note: "Classic free autotune" }
+    ],
+    inFL: false,
+    tutorials: ["hyperpop vocal tutorial autotune", "100 gecs vocal effect"],
+    examples: [
+      { artist: "100 gecs", track: "money machine", year: 2019, yt: "z97qLNXeAMQ", t: 0 },
+      { artist: "Hannah Diamond", track: "Every Night", year: 2014, yt: "EPFvbc4onks", t: 0 }
+    ]
   }
+
 ];
 
 window.GENRES = {
   jungle: { label: "Jungle", color: "#ff7a1a" },
   dubstep: { label: "UK Dubstep", color: "#a46bff" },
   garage: { label: "UK Garage", color: "#18e0c8" },
-  electro: { label: "Electro", color: "#ff3d8b" }
+  electro: { label: "Electro", color: "#ff3d8b" },
+  hyperpop: { label: "Hyperpop", color: "#4da3ff" }
 };

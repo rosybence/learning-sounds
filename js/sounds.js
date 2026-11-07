@@ -478,6 +478,183 @@
     return dur + 0.3;
   };
 
+
+  // ---------- added bass + hyperpop recipes ----------
+  R.neuro = (ac, out, t) => {
+    const st = 60 / 172 / 4, bars = 2, dur = bars * 16 * st;
+    // dnb beat
+    for (let b = 0; b < bars; b++) {
+      const bt = t + b * 16 * st;
+      [0, 10].forEach(i => kick(ac, out, bt + i * st, { vol: 0.9, decay: 0.25 }));
+      [4, 12].forEach(i => snare(ac, out, bt + i * st, { vol: 0.8, tone: 210, decay: 0.16 }));
+      for (let i = 2; i < 16; i += 2) hat(ac, out, bt + i * st, { vol: 0.12 });
+    }
+    // bass: detuned saws -> distortion -> moving band-pass, plus clean sub
+    const bp = ac.createBiquadFilter(); bp.type = "bandpass"; bp.Q.value = 3;
+    const g = ac.createGain(); g.gain.value = 0.0001;
+    const pre = ac.createGain(); pre.gain.value = 0.5;
+    pre.connect(drive(ac, bp, 6)); bp.connect(g); g.connect(out);
+    const notes = [[0, 2, 31], [3, 1, 31], [6, 2, 34], [10, 2, 29], [14, 2, 31], [16, 2, 31], [19, 1, 36], [22, 3, 34], [26, 2, 29], [29, 3, 31]];
+    const o1 = osc(ac, "sawtooth", midi(31), pre, t, t + dur, -12), o2 = osc(ac, "sawtooth", midi(31), pre, t, t + dur, 12);
+    const subG = ac.createGain(); subG.gain.value = 0.0001; subG.connect(out);
+    const so = osc(ac, "sine", midi(31), subG, t, t + dur);
+    notes.forEach(([i, l, n], k) => {
+      const s0 = t + i * st, e0 = s0 + l * st * 0.9;
+      [o1, o2, so].forEach(o => o.frequency.setValueAtTime(midi(n), s0));
+      g.gain.setValueAtTime(0.0001, s0); g.gain.exponentialRampToValueAtTime(0.22, s0 + 0.01); g.gain.setValueAtTime(0.22, e0 - 0.02); g.gain.exponentialRampToValueAtTime(0.0001, e0);
+      subG.gain.setValueAtTime(0.0001, s0); subG.gain.exponentialRampToValueAtTime(0.4, s0 + 0.01); subG.gain.setValueAtTime(0.4, e0 - 0.02); subG.gain.exponentialRampToValueAtTime(0.0001, e0);
+      const a = k % 2 ? 2400 : 500, b2 = k % 2 ? 500 : 2600;
+      bp.frequency.setValueAtTime(a, s0); bp.frequency.exponentialRampToValueAtTime(b2, e0);
+    });
+    return dur + 0.3;
+  };
+
+  R.growl = (ac, out, t) => {
+    const st = 60 / 145 / 4, dur = 32 * st;
+    kick(ac, out, t, { vol: 1, decay: 0.4 }); snare(ac, out, t + 8 * st, { vol: 0.9, decay: 0.22 }); clap(ac, out, t + 8 * st, 0.4);
+    kick(ac, out, t + 16 * st, { vol: 1, decay: 0.4 }); kick(ac, out, t + 22 * st, { vol: 0.7 }); snare(ac, out, t + 24 * st, { vol: 0.9, decay: 0.22 }); clap(ac, out, t + 24 * st, 0.4);
+    const hits = [[2, 3], [6, 2], [11, 4], [18, 2], [20, 2], [27, 4]];
+    hits.forEach(([i, l]) => {
+      const s0 = t + i * st, e0 = s0 + l * st;
+      const car = ac.createOscillator(); car.type = "sawtooth"; car.frequency.value = midi(30);
+      const mod = ac.createOscillator(); mod.type = "sine"; mod.frequency.value = midi(30) * 2;
+      const idx = ac.createGain(); idx.gain.setValueAtTime(40, s0); idx.gain.linearRampToValueAtTime(700, s0 + (e0 - s0) * 0.6); idx.gain.linearRampToValueAtTime(150, e0);
+      mod.connect(idx); idx.connect(car.frequency);
+      // vowel: two formant band-passes sweeping 'oww' -> 'aah'
+      const f1 = ac.createBiquadFilter(); f1.type = "bandpass"; f1.Q.value = 5; f1.frequency.setValueAtTime(350, s0); f1.frequency.exponentialRampToValueAtTime(800, e0);
+      const f2 = ac.createBiquadFilter(); f2.type = "bandpass"; f2.Q.value = 6; f2.frequency.setValueAtTime(700, s0); f2.frequency.exponentialRampToValueAtTime(1300, e0);
+      const g = ac.createGain(); g.gain.setValueAtTime(0.0001, s0); g.gain.exponentialRampToValueAtTime(0.5, s0 + 0.01); g.gain.setValueAtTime(0.5, e0 - 0.03); g.gain.exponentialRampToValueAtTime(0.0001, e0);
+      const d = drive(ac, g, 4);
+      car.connect(f1); car.connect(f2); f1.connect(d); f2.connect(d); g.connect(out);
+      const sub = ac.createGain(); env(sub.gain, s0, 0.35, 0.01, 0.05, 0.35, e0); sub.connect(out); osc(ac, "sine", midi(30), sub, s0, e0 + 0.05);
+      car.start(s0); mod.start(s0); car.stop(e0 + 0.05); mod.stop(e0 + 0.05);
+    });
+    return dur + 0.3;
+  };
+
+  R.speedbass = (ac, out, t) => {
+    const st = 60 / 130 / 4, dur = 32 * st;
+    for (let i = 0; i < 32; i += 4) kick(ac, out, t + i * st, { vol: 0.85, decay: 0.28 });
+    [4, 12, 20, 28].forEach(i => clap(ac, out, t + i * st, 0.35));
+    for (let i = 2; i < 32; i += 4) hat(ac, out, t + i * st + st * 0.15, { open: true, vol: 0.12 });
+    const lp = ac.createBiquadFilter(); lp.type = "lowpass"; lp.Q.value = 4;
+    const g = ac.createGain(); g.gain.value = 0.0001; lp.connect(g); g.connect(drive(ac, out, 1.8));
+    const o1 = osc(ac, "sawtooth", midi(33), lp, t, t + dur, -10), o2 = osc(ac, "sawtooth", midi(33), lp, t, t + dur, 10), o3 = osc(ac, "square", midi(21), lp, t, t + dur);
+    const pat = [[2, 33, 2], [6, 33, 1], [7, 36, 2], [10, 33, 2], [14, 31, 2], [18, 33, 2], [22, 33, 1], [23, 40, 2], [26, 38, 2], [30, 36, 2]];
+    pat.forEach(([i, n, l]) => {
+      const s0 = t + i * st, e0 = s0 + l * st * 0.95, f = midi(n);
+      [[o1, 1], [o2, 1], [o3, 0.5]].forEach(([o, m]) => { o.frequency.setValueAtTime(f * m * 2.2, s0); o.frequency.exponentialRampToValueAtTime(f * m, s0 + 0.09); });
+      g.gain.setValueAtTime(0.0001, s0); g.gain.exponentialRampToValueAtTime(0.3, s0 + 0.008); g.gain.setValueAtTime(0.3, e0 - 0.02); g.gain.exponentialRampToValueAtTime(0.0001, e0);
+      lp.frequency.setValueAtTime(3500, s0); lp.frequency.exponentialRampToValueAtTime(350, s0 + 0.25);
+    });
+    return dur + 0.3;
+  };
+
+  R.electrobass = (ac, out, t) => {
+    const st = 60 / 118 / 4, dur = 32 * st;
+    for (let b = 0; b < 2; b++) {
+      const bt = t + b * 16 * st;
+      [0, 6, 10].forEach(i => kick(ac, out, bt + i * st, { f0: 130, f1: 50, decay: 0.5, vol: 0.8 }));
+      [4, 12].forEach(i => clap(ac, out, bt + i * st, 0.5));
+      for (let i = 0; i < 16; i += 2) hat(ac, out, bt + i * st, { vol: i % 4 ? 0.1 : 0.16 });
+    }
+    const lp = ac.createBiquadFilter(); lp.type = "lowpass"; lp.Q.value = 6; lp.frequency.value = 900;
+    lp.connect(out);
+    const pat = [0, 2, 3, 6, 8, 10, 11, 14]; const notes = [36, 36, 48, 36, 39, 36, 43, 46];
+    for (let b = 0; b < 2; b++) pat.forEach((i, k) => {
+      const s0 = t + (b * 16 + i) * st, g = ac.createGain();
+      env(g.gain, s0, 0.35, 0.003, st * 0.8);
+      const f = ac.createBiquadFilter(); f.type = "lowpass"; f.Q.value = 7; f.frequency.setValueAtTime(2400, s0); f.frequency.exponentialRampToValueAtTime(300, s0 + st);
+      g.connect(f); f.connect(out);
+      osc(ac, "square", midi(notes[k] - (b ? 2 : 0)), g, s0, s0 + st);
+    });
+    return dur + 0.4;
+  };
+
+  R.hyper808 = (ac, out, t) => {
+    const st = 60 / 150 / 4, dur = 32 * st;
+    const crush = drive(ac, gainNode(ac, out, 0.55), 9);
+    const g = ac.createGain(); g.gain.value = 0.0001; g.connect(crush);
+    const o = osc(ac, "sine", midi(31), g, t, t + dur);
+    const notes = [[0, 31, 6], [6, 34, 4], [10, 29, 6], [16, 31, 6], [22, 38, 3], [25, 36, 7]];
+    notes.forEach(([i, n, l], k) => {
+      const s0 = t + i * st, e0 = s0 + l * st;
+      if (k === 0) o.frequency.setValueAtTime(midi(n) * 3, s0);
+      o.frequency.setTargetAtTime(midi(n), s0, k ? 0.035 : 0.02);   // glide
+      g.gain.setValueAtTime(0.0001, s0); g.gain.exponentialRampToValueAtTime(0.3, s0 + 0.005); g.gain.setTargetAtTime(0.18, s0 + 0.05, 0.3); g.gain.setTargetAtTime(0.0001, e0 - 0.03, 0.02);
+      kick(ac, out, s0, { vol: 0.5, decay: 0.12, f1: 70 });
+    });
+    [8, 24].forEach(i => { clap(ac, out, t + i * st, 0.55); snare(ac, out, t + i * st, { vol: 0.5 }); });
+    // hat rolls: 16ths, then 32nds and triplets
+    for (let i = 0; i < 32; i += 2) hat(ac, out, t + i * st, { vol: 0.12, freq: 9000 });
+    for (let k = 0; k < 8; k++) hat(ac, out, t + (12 + k * 0.5) * st, { vol: 0.1, freq: 9500 });
+    for (let k = 0; k < 9; k++) hat(ac, out, t + (28 + k * (4 / 9)) * st, { vol: 0.1, freq: 9500 });
+    return dur + 0.3;
+  };
+
+  R.supersaw = (ac, out, t) => {
+    const st = 60 / 150 / 4, dur = 32 * st;
+    const bus = reverb(ac, out, 2.6, 0.35);
+    const pump = ac.createGain(); pump.connect(bus);
+    for (let i = 0; i < 32; i += 4) {
+      const s0 = t + i * st; kick(ac, out, s0, { vol: 0.9, decay: 0.25 });
+      pump.gain.setValueAtTime(0.25, s0); pump.gain.linearRampToValueAtTime(1, s0 + st * 3);
+    }
+    [4, 12, 20, 28].forEach(i => clap(ac, out, t + i * st, 0.35));
+    const hp = ac.createBiquadFilter(); hp.type = "highpass"; hp.frequency.value = 180; hp.connect(pump);
+    const chords = [[0, [60, 64, 67, 72]], [8, [57, 60, 64, 69]], [16, [53, 57, 60, 65]], [24, [55, 59, 62, 67]]];
+    chords.forEach(([i, ns]) => {
+      const s0 = t + i * st, e0 = s0 + 8 * st;
+      const g = ac.createGain(); env(g.gain, s0, 0.05, 0.01, 0.1, 0.045, e0); g.connect(hp);
+      ns.forEach(n => [-32, -20, -9, 0, 9, 20, 32].forEach(dt => osc(ac, "sawtooth", midi(n), g, s0, e0 + 0.05, dt)));
+    });
+    return dur + 1;
+  };
+
+  R.bubblepluck = (ac, out, t) => {
+    const st = 60 / 130 / 4, bus = reverb(ac, out, 1.4, 0.2);
+    const mel = [[0, 72], [2, 79], [3, 76], [6, 84], [8, 74], [10, 81], [11, 79], [14, 86], [16, 72], [18, 79], [19, 83], [22, 88], [24, 77], [26, 84], [28, 81], [30, 91]];
+    mel.forEach(([i, n]) => {
+      const s0 = t + i * st, f = midi(n);
+      const car = ac.createOscillator(); car.type = "sine";
+      car.frequency.setValueAtTime(f * 1.5, s0); car.frequency.exponentialRampToValueAtTime(f, s0 + 0.04); // rubbery pitch drop
+      const mod = ac.createOscillator(); mod.type = "sine"; mod.frequency.value = f * 3.5;
+      const idx = ac.createGain(); idx.gain.setValueAtTime(f * 4, s0); idx.gain.exponentialRampToValueAtTime(1, s0 + 0.18);
+      mod.connect(idx); idx.connect(car.frequency);
+      const g = ac.createGain(); env(g.gain, s0, 0.3, 0.002, 0.25);
+      car.connect(g); g.connect(bus); car.start(s0); mod.start(s0); car.stop(s0 + 0.4); mod.stop(s0 + 0.4);
+    });
+    // bouncy kick + snap
+    for (let i = 0; i < 32; i += 8) kick(ac, out, t + i * st, { vol: 0.7, decay: 0.3 });
+    [4, 12, 20, 28].forEach(i => clap(ac, out, t + i * st, 0.3));
+    return 32 * st + 0.8;
+  };
+
+  R.glitch = (ac, out, t) => {
+    // bitcrush via a stepped waveshaper
+    const ws = ac.createWaveShaper(), n = 1024, c = new Float32Array(n);
+    for (let i = 0; i < n; i++) { const x = i / (n - 1) * 2 - 1; c[i] = Math.round(x * 6) / 6; }
+    ws.curve = c; ws.connect(out);
+    const gate = ac.createGain(); gate.gain.value = 0; gate.connect(ws);
+    const oscs = [60, 64, 67, 71].map(nn => osc(ac, "sawtooth", midi(nn), gate, t, t + 3.2, (nn % 3) * 5));
+    const lp = null;
+    let time = t, step = 0.25, pitch = 1;
+    // 1 bar normal, then stutters that get faster and rise in pitch
+    gate.gain.setValueAtTime(0.12, t); time = t + 1;
+    const plan = [[0.25, 4], [0.125, 6], [0.0625, 10], [0.03125, 16]];
+    plan.forEach(([len, count]) => {
+      for (let k = 0; k < count; k++) {
+        gate.gain.setValueAtTime(0.14, time); gate.gain.setValueAtTime(0, time + len * 0.6);
+        pitch *= 1.025; oscs.forEach((o, j) => o.frequency.setValueAtTime(midi([60, 64, 67, 71][j]) * pitch, time));
+        if (k % 2 === 0) kick(ac, out, time, { vol: 0.5, decay: 0.08, f1: 80 });
+        time += len;
+      }
+    });
+    gate.gain.setValueAtTime(0, time);
+    kick(ac, out, time + 0.05, { vol: 1, decay: 0.5 }); clap(ac, out, time + 0.05, 0.6);
+    return time - t + 0.8;
+  };
+
   // ---------- public API ----------
   function stop() {
     if (current) { const g = current; g.gain.setTargetAtTime(0.0001, ctx.currentTime, 0.03); setTimeout(() => g.disconnect(), 300); current = null; }

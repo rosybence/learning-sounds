@@ -253,7 +253,7 @@
     } else {
       opts = Object.entries(GENRES).map(([k, v]) => ({ label: v.label, ok: k === card.genre }));
     }
-    $("#qOptions").innerHTML = opts.map((o, k) => `<button class="opt" data-ok="${o.ok}"><span class="key">${"ABCD"[k]}</span>${esc(o.label)}</button>`).join("");
+    $("#qOptions").innerHTML = opts.map((o, k) => `<button class="opt" data-ok="${o.ok}"><span class="key">${"ABCDE"[k]}</span>${esc(o.label)}</button>`).join("");
     $("#qOptions").querySelectorAll(".opt").forEach(b => b.addEventListener("click", () => answer(b)));
     $("#qReveal").classList.add("hidden"); $("#qNext").classList.add("hidden");
     setNow(`Q${q.i + 1} · ???`);
