@@ -1069,7 +1069,7 @@ window.CARDS = [
   {
     id: "think", showReal: true, name: "Think break", aka: "Think (About It) break, Yeah! Woo!",
     genre: "jungle", also: ["Hip hop", "Breakbeat", "Drum & bass", "Big beat"], type: "Drums",
-    listen: "A tight, funky drum break with sharp snares and the shouted 'Yeah!' and 'Woo!' vocal hits on top. Sped up, it drives countless jungle and hip hop tracks. The pad plays a programmed version at the original tempo, then sped up jungle-style; the real record is on the card.",
+    listen: "A tight, funky drum break with sharp snares and crisp hats (on the record, shouted 'Yeah!' and 'Woo!' hits sit on top). Sped up, it drives countless jungle and hip hop tracks. The pad plays a programmed version at the original tempo, then sped up jungle-style; the real record is on the card.",
     recipe: [
       "Find the drum break in Lyn Collins' 'Think (About It)' (1972).",
       "Slice every hit (or use the whole loop) in a slicer.",
