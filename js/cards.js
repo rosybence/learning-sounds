@@ -778,6 +778,118 @@ window.CARDS = [
       { artist: "Rhythm & Sound", track: "Mango Drive", year: 1998, yt: "yKd-S9hLlgY", t: 0 }
     ]
   }
+,
+  // ---------- complextro ----------
+  {
+    id: "switchbass", name: "Instrument-switching bass", aka: "Complextro chop, multi-synth bassline",
+    genre: "complextro", also: ["Electro house", "Brostep"], type: "Bass",
+    listen: "One bassline/lead that changes to a completely different synth every note or two — saw, growl, square, vocal-ish — so it sounds like several instruments taking turns at high speed. Around 128 BPM.",
+    recipe: [
+      "Write one simple 16th-note riff.",
+      "Copy it onto 3–5 different synth patches (saw, FM growl, square, formant).",
+      "Chop between them so each note or pair of notes comes from a different patch.",
+      "Glue it all with the same distortion, OTT compression and heavy sidechain."
+    ],
+    plugins: [
+      { name: "Vital", where: "Free", note: "Make several contrasting patches" },
+      { name: "3x Osc + Fruity Formula Controller", where: "FL", note: "Multiple patches on separate channels" },
+      { name: "Surge XT", where: "Free", note: "Fast patch switching via multiple instances" }
+    ],
+    inFL: true,
+    tutorials: ["complextro tutorial porter robinson style", "how to make complextro fl studio"],
+    examples: [
+      { artist: "Porter Robinson", track: "Spitfire", year: 2011, yt: "rgT1qFIWHYc", t: 0 },
+      { artist: "Wolfgang Gartner", track: "Illmerica", year: 2011, yt: "G_rQ6Av0gMY", t: 0 }
+    ]
+  },
+  {
+    id: "chiplead", name: "Chiptune square lead", aka: "8-bit lead, pulse wave arp",
+    genre: "complextro", also: ["Chiptune", "Hyperpop", "Nu-disco"], type: "Synth",
+    listen: "A bright, buzzy video-game sound made from thin square (pulse) waves, often playing super-fast arpeggios — like an old Game Boy or NES.",
+    recipe: [
+      "Pulse/square oscillator; try narrow pulse widths (12.5% or 25%).",
+      "No filter, instant attack, short release.",
+      "Play fast arpeggios (1/16 or 1/32) that cycle through chord notes.",
+      "Optional: pitch slides and vibrato like old console music."
+    ],
+    plugins: [
+      { name: "Magical 8bit Plug 2 (YMCK)", where: "Free", note: "Classic free chiptune synth" },
+      { name: "3x Osc", where: "FL", note: "Square wave + arpeggiator" },
+      { name: "Vital", where: "Free", note: "Pulse width + arp" }
+    ],
+    inFL: true,
+    tutorials: ["chiptune lead sound tutorial", "magical 8bit plug tutorial"],
+    examples: [
+      { artist: "Mord Fustang", track: "Lick the Rainbow", year: 2011, yt: "SUurkE6XvR0", t: 0 },
+      { artist: "Porter Robinson", track: "Say My Name", year: 2010, yt: "f9_apoZ4eKk", t: 0 }
+    ]
+  },
+  {
+    id: "dirtyelectro", name: "Dirty electro house bass", aka: "Fidget / filthy electro bass",
+    genre: "complextro", also: ["Electro house", "Big room", "Fidget house"], type: "Bass",
+    listen: "A gritty, distorted saw bass in short, punchy riffs at about 128 BPM, with filter sweeps and the whole thing ducking hard to every kick.",
+    recipe: [
+      "Detuned saws (or a Reese) with heavy distortion.",
+      "Low-pass filter with an envelope for punch; automate sweeps.",
+      "Short, stabby 8th/16th riffs with octave jumps.",
+      "Heavy sidechain to a four-to-the-floor kick."
+    ],
+    plugins: [
+      { name: "3x Osc + Fruity Blood Overdrive", where: "FL", note: "Saws + grit" },
+      { name: "Vital", where: "Free", note: "Unison + distortion" },
+      { name: "Fruity Limiter (sidechain)", where: "FL", note: "Duck to the kick" }
+    ],
+    inFL: true,
+    tutorials: ["dirty electro house bass tutorial", "knife party bass tutorial"],
+    examples: [
+      { artist: "Knife Party", track: "Internet Friends", year: 2011, yt: "luJJBeCFeM0", t: 0 },
+      { artist: "Wolfgang Gartner", track: "Redline", year: 2012, yt: "G-z6gj2z-Vw", t: 0 }
+    ]
+  },
+  {
+    id: "laserzap", name: "Laser zaps & pitch dives", aka: "Pew FX, zap",
+    genre: "complextro", also: ["Electro", "Dubstep", "Hyperpop"], type: "FX",
+    listen: "Quick sci-fi 'pew' and 'zoww' sounds — tones that dive (or shoot up) in pitch in a split second, fired in rhythm between bass hits.",
+    recipe: [
+      "A square or saw blip with a very fast pitch envelope (e.g. 4 kHz → 100 Hz in 0.1–0.2 s).",
+      "Short amp envelope.",
+      "Add a little delay so it ricochets.",
+      "Fire them in gaps of the riff as fills."
+    ],
+    plugins: [
+      { name: "3x Osc + pitch envelope", where: "FL", note: "Channel settings → INS → pitch" },
+      { name: "Vital", where: "Free", note: "Envelope → pitch, fast decay" },
+      { name: "Fruity Delay 3", where: "FL", note: "Ricochet echoes" }
+    ],
+    inFL: true,
+    tutorials: ["laser zap sound design", "pew laser fx vital tutorial"],
+    examples: [
+      { artist: "Porter Robinson", track: "The State", year: 2011, yt: "nFIxrk7_rpE", t: 0 },
+      { artist: "Porter Robinson", track: "Spitfire", year: 2011, yt: "rgT1qFIWHYc", t: 0 }
+    ]
+  },
+  {
+    id: "pump", name: "Sidechain pump", aka: "Pumping, ducking",
+    genre: "complextro", also: ["Electro house", "French house", "EDM"], type: "FX",
+    listen: "The whole track 'breathes' with the kick: every time the kick hits, the synths and bass duck out and swell back up — a rhythmic pumping. The demo plays one bar without it, then with it.",
+    recipe: [
+      "Route the kick into a compressor/limiter on the synth bus (sidechain).",
+      "Fast attack, release timed to swell back by the next beat.",
+      "Or draw a volume curve (LFO tool) that dips on every beat.",
+      "Push it hard for the classic pumping sound."
+    ],
+    plugins: [
+      { name: "Fruity Limiter (sidechain)", where: "FL", note: "Classic FL sidechain" },
+      { name: "Fruity Peak Controller", where: "FL", note: "Volume ducking" },
+      { name: "Kilohearts Kickstart-style free LFO tools", where: "Free", note: "Volume-shaper plugins" }
+    ],
+    inFL: true,
+    tutorials: ["sidechain compression fl studio", "sidechain pumping explained"],
+    examples: [
+      { artist: "Madeon", track: "Pop Culture (live mashup)", year: 2011, yt: "lTx3G6h2xyA", t: 0 },
+      { artist: "Knife Party", track: "Internet Friends", year: 2011, yt: "luJJBeCFeM0", t: 0 }
+    ]
+  }
 
 ];
 
@@ -791,5 +903,6 @@ window.GENRES = {
   speedgarage: { label: "Speed Garage", color: "#ff4d4d" },
   acidhouse: { label: "Acid House", color: "#c8ff3d" },
   acidtechno: { label: "Acid Techno", color: "#c0c7d6" },
-  dubtechno: { label: "Dub Techno", color: "#6fbf73" }
+  dubtechno: { label: "Dub Techno", color: "#6fbf73" },
+  complextro: { label: "Complextro", color: "#ff6af0" }
 };

@@ -2,6 +2,19 @@
 // Keys are two card ids joined by "|" in alphabetical order.
 
 window.CONTRASTS = {
+  // ---- complextro ----
+  "growl|switchbass": "A growl is one patch that changes vowel within each hit. The complextro bass jumps between completely different synth patches every note or two.",
+  "neuro|switchbass": "Neuro bass is one snarling sound at 172 BPM drum & bass tempo. The complextro bass hops between different instruments over a 128 BPM four-to-the-floor beat.",
+  "glitch|switchbass": "A glitch stutter repeats the same slice faster and faster. The complextro bass plays a riff where each note is a different instrument.",
+  "bubblepluck|chiplead": "Both are bright and playful. The chiptune lead is a thin, buzzy square wave like an old games console. The hyperpop pluck is a glassy, rubbery FM 'bloop'.",
+  "chiplead|supersaw": "The supersaw is a huge, smooth wall of many detuned saws. The chiptune lead is a single thin, buzzy square wave, often in fast arpeggios.",
+  "dirtyelectro|reese": "A Reese is a slow, smooth churn on long notes. Dirty electro bass is distorted and plays short, punchy stabs over a 128 BPM 4x4 beat with heavy sidechain.",
+  "dirtyelectro|growl": "Growl bass 'talks' with vowel shapes at dubstep tempo. Dirty electro bass is a gritty saw riff in punchy 8ths and 16ths over a 128 BPM 4x4 kick.",
+  "dirtyelectro|speedbass": "Speed garage bass swoops down in pitch at the start of each note with garage swing. Dirty electro bass is straight, distorted and stabby, ducking to a 4x4 kick.",
+  "glitch|laserzap": "A laser zap is a single blip that dives in pitch in a split second. A glitch stutter repeats a slice of the music faster and faster.",
+  "laserzap|siren": "The dub siren is a continuous wailing tone that loops. A laser zap is a very short 'pew' that dives in pitch.",
+  "pump|supersaw": "The supersaw is the synth sound itself. Sidechain pumping is the effect of the volume ducking on every kick, which can be applied to any sound.",
+  "dubdelay|pump": "Dub delay repeats a sound as echoes. Sidechain pumping makes the volume dip and swell with every kick.",
   // ---- basses ----
   "neuro|sub": "A sine sub is a pure, clean low tone with no grit. Neuro bass is all mid-range distortion and snarl at drum & bass speed.",
   "reese|sub": "A sine sub is one pure, still tone. A Reese is two detuned saws, so it's buzzy and slowly churns against itself.",
@@ -65,5 +78,6 @@ window.GENRE_INFO = {
   speedgarage: "130–135 BPM, four-to-the-floor · house beat with garage swing, fat pitch-bending 'bwoing' bass, airhorns and gunshots.",
   acidhouse: "120–126 BPM, four-to-the-floor · Chicago 909/808 drums and the squelchy TB-303 bassline.",
   acidtechno: "135–145 BPM · harder, faster and darker than acid house: distorted screaming 303s over pounding kicks.",
+  complextro: "≈128 BPM, four-to-the-floor electro house · basses and leads that switch instruments every few notes, chiptune leads, gritty saws, laser zaps and heavy sidechain pumping.",
   dubtechno: "118–125 BPM · hypnotic and muffled: chord stabs echoing into long delays, soft steady kicks, tape hiss."
 };
