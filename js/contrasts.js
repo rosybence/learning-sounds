@@ -44,7 +44,7 @@ window.CONTRASTS = {
   // ---- dub / steppas ----
   "halfstep|onedrop": "Both leave beat 1 empty and hit on beat 3. Dubstep half-step is 140 BPM electronic with a big snare. One drop is a slow live reggae groove with a soft rimshot and swung hats.",
   "onedrop|steppersbeat": "One drop has no kick on beat 1 and only hits on beat 3. Steppers puts a kick on every beat, so it marches forward.",
-  "house909|steppersbeat": "Both have four-to-the-floor kicks. House is ≈124 BPM with open hats and claps on 2 and 4. Steppers is slow reggae (≈72 BPM) with a rimshot on beat 3.",
+  "house909|steppersbeat": "Both have four-to-the-floor kicks. House is ≈124 BPM with open hats and claps on 2 and 4. Steppers is ≈140 with a single snare/rimshot on beat 3 and huge sub bass.",
   "dembow|onedrop": "Dembow has a kick on every beat and two snappy snares per half-bar. One drop has no kick on beat 1 and a single rimshot on beat 3.",
   "dubbass|sub": "A dubstep sine sub holds plain low notes. A dub bassline is a melodic, rolling phrase that is the lead instrument.",
   "skank|stabs": "Garage stabs are jazzy synth chords in syncopated rhythms. The reggae skank is a short choppy guitar/organ chord on every off-beat.",
@@ -117,6 +117,6 @@ window.GENRE_INFO = {
   complextro: "≈128 BPM, four-to-the-floor electro house · basses and leads that switch instruments every few notes, chiptune leads, gritty saws, laser zaps and heavy sidechain pumping.",
   reggaeton: "≈88–100 BPM · the dembow rhythm (kick on every beat, boom-ch-boom-chick snare), bouncing 808 bass, plucked guitar hooks, Spanish-language hype vocals.",
   trap: "≈130–150 BPM, half-time · booming 808s that glide, rapid hi-hat rolls, claps on beat 3, dark flute/bell loops and producer tags.",
-  dub: "≈70–80 BPM (steppas felt at 140–150) · reggae remixed on the mixing desk: one drop or four-to-the-floor steppers drums, melodic bass up front, skanks thrown into echo, sirens and melodica.",
+  dub: "≈70–80 BPM (steppas at 140–150) · reggae remixed on the mixing desk: one drop or four-to-the-floor steppers drums, melodic bass up front, skanks thrown into echo, sirens and melodica.",
   dubtechno: "118–125 BPM · hypnotic and muffled: chord stabs echoing into long delays, soft steady kicks, tape hiss."
 };

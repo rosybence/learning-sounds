@@ -1202,9 +1202,9 @@ window.CARDS = [
   {
     id: "steppersbeat", name: "Steppers beat", aka: "Steppas rhythm, rockers",
     genre: "dub", also: ["Steppas", "Roots reggae", "UK sound system"], type: "Drums",
-    listen: "A marching, militant reggae beat: a kick on every beat with the rimshot/snare on beat 3, at about 70–75 BPM (felt as 140–150). Heavier and more driving than one drop.",
+    listen: "A marching, militant beat at about 140–150 BPM: a kick on every single beat (four-to-the-floor) with the snare/rimshot on beat 3. Heavier and more driving than one drop.",
     recipe: [
-      "Tempo 70–75 BPM (or program at 140–150 in half-time).",
+      "Tempo 140–150 BPM.",
       "Kick on every beat (four-to-the-floor).",
       "Rimshot or snare on beat 3, often echoed.",
       "Busy 16th hats/shakers and tom fills; very heavy sub underneath."
