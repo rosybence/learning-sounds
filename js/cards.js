@@ -1067,9 +1067,9 @@ window.CARDS = [
   },
 // ---------- classic breaks ----------
   {
-    id: "think", name: "Think break", aka: "Think (About It) break, Yeah! Woo!",
+    id: "think", showReal: true, name: "Think break", aka: "Think (About It) break, Yeah! Woo!",
     genre: "jungle", also: ["Hip hop", "Breakbeat", "Drum & bass", "Big beat"], type: "Drums",
-    listen: "A tight, funky drum break with sharp snares and the shouted 'Yeah!' and 'Woo!' vocal hits on top. Sped up, it drives countless jungle and hip hop tracks. This is a recording, so the card plays the real thing.",
+    listen: "A tight, funky drum break with sharp snares and the shouted 'Yeah!' and 'Woo!' vocal hits on top. Sped up, it drives countless jungle and hip hop tracks. The pad plays a programmed version at the original tempo, then sped up jungle-style; the real record is on the card.",
     recipe: [
       "Find the drum break in Lyn Collins' 'Think (About It)' (1972).",
       "Slice every hit (or use the whole loop) in a slicer.",
@@ -1087,9 +1087,9 @@ window.CARDS = [
     ]
   },
   {
-    id: "apache", name: "Apache break", aka: "Bongo break",
+    id: "apache", showReal: true, name: "Apache break", aka: "Bongo break",
     genre: "jungle", also: ["Hip hop", "Breakbeat", "B-boy"], type: "Drums",
-    listen: "A rolling, swinging drum break layered with busy bongos and congas, giving it a percussive, tumbling feel. The anthem of b-boy breaking. This is a recording, so the card plays the real thing.",
+    listen: "A rolling, swinging drum break layered with busy bongos and congas, giving it a percussive, tumbling feel. The anthem of b-boy breaking. The pad plays a programmed version at the original tempo, then sped up jungle-style; the real record is on the card.",
     recipe: [
       "Find the drums-and-bongos section of 'Apache' (1973).",
       "Loop or slice it; the bongos give extra rhythm between the hits.",
@@ -1107,9 +1107,9 @@ window.CARDS = [
     ]
   },
   {
-    id: "funkydrummer", name: "Funky Drummer break", aka: "Clyde Stubblefield break",
+    id: "funkydrummer", showReal: true, name: "Funky Drummer break", aka: "Clyde Stubblefield break",
     genre: "jungle", also: ["Hip hop", "Breakbeat", "Big beat"], type: "Drums",
-    listen: "A loose, laid-back funk groove with ghost-note snares and syncopated hats played by Clyde Stubblefield. Lighter and groovier than the Amen. This is a recording, so the card plays the real thing.",
+    listen: "A loose, laid-back funk groove with ghost-note snares and syncopated hats played by Clyde Stubblefield. Lighter and groovier than the Amen. The pad plays a programmed version at the original tempo, then sped up jungle-style; the real record is on the card.",
     recipe: [
       "Find the solo drum break near the end of 'Funky Drummer' (1970).",
       "Loop a bar or two; keep the ghost notes for groove.",
@@ -1127,9 +1127,9 @@ window.CARDS = [
     ]
   },
   {
-    id: "hotpants", name: "Hot Pants break", aka: "I'm Coming break",
+    id: "hotpants", showReal: true, name: "Hot Pants break", aka: "I'm Coming break",
     genre: "jungle", also: ["Hip hop", "Breakbeat", "Drum & bass"], type: "Drums",
-    listen: "A punchy, crisp funk break with a snappy snare and open hi-hats, heard in lots of early-90s jungle and hardcore. This is a recording, so the card plays the real thing.",
+    listen: "A punchy, crisp funk break with a snappy snare and open hi-hats, heard in lots of early-90s jungle and hardcore. The pad plays a programmed version at the original tempo, then sped up jungle-style; the real record is on the card.",
     recipe: [
       "Find the drum break in Bobby Byrd's 'Hot Pants' (1971).",
       "Slice and resequence at jungle tempo.",

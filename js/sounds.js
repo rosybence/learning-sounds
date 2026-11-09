@@ -995,6 +995,58 @@
     return 32 * st + 1;
   };
 
+
+  // ---------- classic breaks (programmed imitations) ----------
+  // pattern: arrays of 16th steps over 2 bars (0–31). g = ghost snares, o = open hats, h = closed hats
+  function playBreak(ac, out, t, pat, bpm, extra) {
+    const st = 60 / bpm / 4, bus = gainNode(ac, out, 0.95);
+    const dusty = ac.createBiquadFilter(); dusty.type = "lowpass"; dusty.frequency.value = 9000; dusty.connect(bus);
+    (pat.k || []).forEach(i => kick(ac, dusty, t + i * st, { f0: 130, f1: 55, decay: 0.22, vol: 0.9 }));
+    (pat.s || []).forEach(i => snare(ac, dusty, t + i * st, { vol: 0.8, tone: 210, decay: 0.15, bright: 1500 }));
+    (pat.g || []).forEach(i => snare(ac, dusty, t + i * st, { vol: 0.22, tone: 210, decay: 0.07, bright: 1800 }));
+    (pat.h || []).forEach(i => hat(ac, dusty, t + i * st, { vol: 0.13, freq: 7000 }));
+    (pat.o || []).forEach(i => hat(ac, dusty, t + i * st, { open: true, vol: 0.15, freq: 6500 }));
+    (pat.r || []).forEach(i => ride(ac, dusty, t + i * st, 0.12));
+    if (extra) extra(dusty, st);
+    return 32 * st;
+  }
+  function bongo(ac, out, s0, high, vol = 0.35) {
+    const o = ac.createOscillator(); o.type = "sine"; const f = high ? 420 : 300;
+    o.frequency.setValueAtTime(f * 1.25, s0); o.frequency.exponentialRampToValueAtTime(f, s0 + 0.03);
+    const g = ac.createGain(); env(g.gain, s0, vol, 0.002, high ? 0.12 : 0.18); o.connect(g); g.connect(out); o.start(s0); o.stop(s0 + 0.25);
+    const n = noise(ac); const bp = ac.createBiquadFilter(); bp.type = "bandpass"; bp.frequency.value = f * 4; bp.Q.value = 3;
+    const ng = ac.createGain(); env(ng.gain, s0, vol * 0.3, 0.001, 0.015); n.connect(bp); bp.connect(ng); ng.connect(out); n.start(s0, Math.random()); n.stop(s0 + 0.03);
+  }
+  function shout(ac, out, s0, vowels, len, pitch) {
+    // tiny formant 'yeah' / 'woo' made from the voice helper
+    const step = len / vowels.length;
+    voice(ac, out, [pitch], vowels.map((v, k) => [s0 + k * step, step * 1.1, v, 1 + (k ? -0.06 : 0.04)]), { type: "sawtooth", vol: 0.45, noiseAmt: 0.25 });
+  }
+  function twoSpeeds(ac, out, t, pat, bpm, extra) {
+    const l1 = playBreak(ac, out, t, pat, bpm, extra);
+    const l2 = playBreak(ac, out, t + l1 + 0.25, pat, 166, extra);  // sped up, jungle style
+    return l1 + 0.25 + l2 + 0.4;
+  }
+  const H8 = [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30];
+  R.think = (ac, out, t) => twoSpeeds(ac, out, t, {
+    k: [0, 6, 10, 16, 22, 26, 27], s: [4, 12, 20, 28], g: [9, 15, 25, 31], h: H8, o: [14, 30]
+  }, 112, (bus, st) => {
+    shout(ac, bus, t + 0 * st, ["e", "a"], st * 2.2, 185);
+    shout(ac, bus, t + 18 * st, ["u", "o"], st * 2.2, 260);
+  });
+  R.apache = (ac, out, t) => twoSpeeds(ac, out, t, {
+    k: [0, 7, 10, 16, 23, 26], s: [4, 12, 20, 28], g: [14, 30], h: H8
+  }, 112, (bus, st) => {
+    [1, 3, 5, 6, 9, 11, 13, 15, 17, 19, 21, 22, 25, 27, 29, 31].forEach((i, k) => bongo(ac, bus, t + i * st, k % 3 !== 2));
+  });
+  R.funkydrummer = (ac, out, t) => twoSpeeds(ac, out, t, {
+    k: [0, 3, 10, 13, 16, 19, 26, 29], s: [4, 12, 20, 28], g: [7, 9, 15, 23, 25, 31],
+    h: [0, 1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 15, 16, 17, 18, 19, 20, 21, 23, 24, 25, 26, 27, 28, 29, 31], o: [6, 14, 22, 30]
+  }, 102);
+  R.hotpants = (ac, out, t) => twoSpeeds(ac, out, t, {
+    k: [0, 3, 8, 10, 16, 19, 24, 26], s: [4, 12, 20, 28], g: [7, 15, 23], h: [0, 4, 8, 12, 16, 20, 24, 28], o: [2, 6, 10, 14, 18, 22, 26, 30]
+  }, 116);
+
   // ---------- public API ----------
   function stop() {
     if (current) { const g = current; g.gain.setTargetAtTime(0.0001, ctx.currentTime, 0.03); setTimeout(() => g.disconnect(), 300); current = null; }
