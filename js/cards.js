@@ -957,27 +957,6 @@ window.CARDS = [
       { artist: "Bad Bunny & Jhay Cortez", track: "DÁKITI", year: 2020, yt: "TmKh7lAwnBI", t: 0 }
     ]
   },
-  {
-    id: "regtag", name: "Reggaeton ad-libs & DJ tags", aka: "Dale!, shouted hype vocals",
-    genre: "reggaeton", also: ["Latin trap", "Dancehall"], type: "Vocal",
-    listen: "Shouted hype words and catchphrases (Dale!, artist names, yeah yeah) dropped over the beat, often with echo. This is a recording, so the card plays a real example.",
-    recipe: [
-      "Record short shouted phrases and the artist/producer's name.",
-      "Place them at the start of sections and in gaps.",
-      "Add delay throws and a little distortion.",
-      "Keep them consistent so they become a signature."
-    ],
-    plugins: [
-      { name: "Fruity Delay 3", where: "FL", note: "Echo throws" },
-      { name: "Edison", where: "FL", note: "Cut and place phrases" }
-    ],
-    inFL: true,
-    tutorials: ["reggaeton vocal adlibs mixing", "how to make a producer tag"],
-    examples: [
-      { artist: "Daddy Yankee", track: "Gasolina", year: 2004, yt: "CCF1_jI8Prk", t: 0 },
-      { artist: "Don Omar feat. Lucenzo", track: "Danza Kuduro", year: 2010, yt: "7zp1TbLFPp8", t: 0 }
-    ]
-  },
   // ---------- trap ----------
   {
     id: "hatrolls", name: "Trap hi-hat rolls", aka: "Hat rolls, triplet hats",
@@ -1042,27 +1021,6 @@ window.CARDS = [
     examples: [
       { artist: "Future", track: "Mask Off", year: 2017, yt: "xvZqHgFz51I", t: 0, note: "The famous flute loop" },
       { artist: "Lil Uzi Vert", track: "XO Tour Llif3", year: 2017, yt: "WrsFXgQk5UI", t: 0 }
-    ]
-  },
-  {
-    id: "traptag", name: "Producer tag", aka: "Beat tag, signature drop",
-    genre: "trap", also: ["Hip hop", "Drill", "Reggaeton"], type: "Vocal",
-    listen: "A short spoken phrase or sound at the start of a track that tells you who made the beat: a producer's audio signature. This is a recording, so the card plays a real example.",
-    recipe: [
-      "Record a short catchphrase (or have someone say it).",
-      "Process it with pitch, reverb or distortion so it's distinctive.",
-      "Put it at the very start or just before the drop.",
-      "Use the same tag on every beat."
-    ],
-    plugins: [
-      { name: "Edison", where: "FL", note: "Record and edit the tag" },
-      { name: "Fruity Reeverb 2 / Fruity Delay 3", where: "FL", note: "Make it big" }
-    ],
-    inFL: true,
-    tutorials: ["how to make a producer tag fl studio"],
-    examples: [
-      { artist: "Future (prod. Metro Boomin)", track: "Mask Off", year: 2017, yt: "xvZqHgFz51I", t: 0 },
-      { artist: "Migos (prod. Metro Boomin)", track: "Bad and Boujee", year: 2016, yt: "S-sJp1FfG7Q", t: 0 }
     ]
   },
 // ---------- classic breaks ----------

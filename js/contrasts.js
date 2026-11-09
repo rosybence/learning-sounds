@@ -30,9 +30,6 @@ window.CONTRASTS = {
   "bubblepluck|trapmelody": "The hyperpop pluck is bright, rubbery and playful. The trap melody is dark and moody, often a breathy flute or a glassy bell in a minor key.",
   "regpluck|trapmelody": "The reggaeton pluck is a bright guitar hook over a bouncing dembow. The trap melody is darker and more hypnotic, over half-time drums and hat rolls.",
   "regpluck|stabs": "Garage stabs are short chords. The reggaeton pluck is a single-note guitar melody.",
-  "regtag|traptag": "A producer tag is one signature phrase at the start of a beat. Reggaeton ad-libs are hype shouts sprinkled throughout the song.",
-  "ragga|regtag": "Ragga chops are Jamaican MC vocals chopped over breakbeats. Reggaeton ad-libs are Spanish-language hype shouts over a dembow.",
-  "chipmunk|traptag": "The producer tag is a short spoken signature. The hyperpop vocal is a whole sung line, pitched up and hard-tuned.",
   // ---- breaks ----
   "amen|think": "The Amen is busy and rolling with a crashing ride. The Think break is tighter and punchier, with the shouted 'Yeah!' and 'Woo!' on top.",
   "amen|apache": "The Amen is a crashing kit with skipping snares. The Apache has bongos and congas tumbling around the drums.",
