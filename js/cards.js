@@ -95,7 +95,7 @@ window.CARDS = [
   },
   {
     id: "siren", name: "Dub siren", aka: "Sound-system siren",
-    genre: "jungle", also: ["Dub", "Dubstep", "Reggae sound systems"], type: "FX",
+    genre: "dub", also: ["Jungle", "Dubstep", "Steppas"], type: "FX",
     listen: "A rising, wailing electronic siren that loops and echoes away into a long delay tail.",
     recipe: [
       "One oscillator (square or sine).",
@@ -181,7 +181,7 @@ window.CARDS = [
   },
   {
     id: "dubdelay", name: "Dub delay throws", aka: "Echo throws, spring reverb",
-    genre: "dubstep", also: ["Dub", "Jungle"], type: "FX",
+    genre: "dub", also: ["Dubstep", "Jungle", "Steppas"], type: "FX",
     listen: "A single hit or chord that keeps repeating, getting darker and washier as it fades, often with a metallic spring-reverb splash.",
     recipe: [
       "Send a single snare, rim or chord stab to a delay (dotted 8th or 1/4).",
@@ -489,7 +489,7 @@ window.CARDS = [
   {
     id: "speedbass", name: "Speed garage bass", aka: "'Bwoing' bass, pitch-bend bass",
     genre: "speedgarage", also: ["UK Garage", "Bassline", "UK bass"], type: "Bass",
-    listen: "A fat, rubbery bass that drops in pitch at the start of each note — 'bwoing!' — over a four-to-the-floor house beat at about 130 BPM.",
+    listen: "A fat, rubbery, Reese-like bass that bends down in pitch at the start of notes (bwoing!) over a four-to-the-floor house beat at about 130 BPM. This card plays the real thing from YouTube.",
     recipe: [
       "Detuned saw or Reese-style bass.",
       "Add a fast pitch envelope: each note starts high and dives down to the right note.",
@@ -646,7 +646,7 @@ window.CARDS = [
   {
     id: "warpbass", name: "Bassline 'warp' bass", aka: "Niche bass, wobbly 4x4 bass",
     genre: "bassline", also: ["Speed garage", "UK bass", "Bass house"], type: "Bass",
-    listen: "A loud, buzzy mid-range bass that wobbles and 'talks' in bouncy patterns over a four-to-the-floor beat at about 135–140 BPM. It's the star of the track.",
+    listen: "A loud, buzzy, wobbling mid-range bass that warps in pitch and talks in bouncy patterns over a four-to-the-floor beat at about 135–140 BPM. It's the star of the track. This card plays the real thing from YouTube.",
     recipe: [
       "Two detuned square/saw oscillators an octave apart.",
       "Low-pass filter with resonance; an LFO (1/8 or 1/16) wobbles the cutoff.",
@@ -690,12 +690,12 @@ window.CARDS = [
   {
     id: "gunshot", name: "Gunshot & airhorn FX", aka: "Sound-system FX",
     genre: "speedgarage", also: ["Jungle", "Dancehall", "Grime"], type: "FX",
-    listen: "A blaring 'BAAP BAAP BAAAAP' horn and booming gunshot effects — sound-system crowd-hype noises dropped in before or over the drop.",
+    listen: "A blaring BAAP BAAP BAAAAP horn and booming gunshot effects: sound-system crowd-hype noises dropped in before or over the drop. This is a recording, so the card plays a real example.",
     recipe: [
       "Airhorn: several saw waves a few notes apart, short pitch dip, played in a 'baap-baap-baaap' rhythm.",
       "Gunshot: a burst of noise with a low thump, then a big reverb tail.",
       "Use sparingly as hype FX before drops.",
-      "Free CC0 versions exist on Freesound."
+      "Free CC0 versions exist on Freesound. This card plays a real example from YouTube."
     ],
     plugins: [
       { name: "3x Osc", where: "FL", note: "Stacked saws for the horn" },
@@ -890,7 +890,393 @@ window.CARDS = [
       { artist: "Knife Party", track: "Internet Friends", year: 2011, yt: "luJJBeCFeM0", t: 0 }
     ]
   }
-
+,
+// ---------- reggaeton ----------
+  {
+    id: "dembow", name: "Dembow beat", aka: "Dem bow riddim, boom-ch-boom-chick",
+    genre: "reggaeton", also: ["Dancehall", "Latin trap", "Moombahton"], type: "Drums",
+    listen: "A kick on every beat with a snappy snare/timbale hitting just before and just after beats 2 and 4 (boom-ch-boom-chick) at about 88–100 BPM. Instantly recognisable bounce.",
+    recipe: [
+      "Tempo around 90–98 BPM.",
+      "Kick on every beat.",
+      "Snare (or timbale/rim) on the 4th 16th of beat 1 and the 'and' of beat 2, then the same for beats 3–4 (a 3+3+2 feel).",
+      "Add shakers/hats in 8ths and the odd tom fill."
+    ],
+    plugins: [
+      { name: "FPC", where: "FL", note: "Drum pads" },
+      { name: "Channel rack step sequencer", where: "FL", note: "Snares on steps 4, 7, 12, 15" }
+    ],
+    inFL: true,
+    tutorials: ["how to make a dembow beat fl studio", "reggaeton drum pattern tutorial"],
+    examples: [
+      { artist: "Daddy Yankee", track: "Gasolina", year: 2004, yt: "CCF1_jI8Prk", t: 0 },
+      { artist: "Shabba Ranks", track: "Dem Bow", year: 1990, yt: "ARG1O3qicXo", t: 0, note: "The Jamaican dancehall track the rhythm is named after" }
+    ]
+  },
+  {
+    id: "regbass", name: "Reggaeton 808 bass", aka: "Tresillo bass",
+    genre: "reggaeton", also: ["Latin trap", "Dancehall"], type: "Bass",
+    listen: "A deep, round 808 bass that bounces in a 3+3+2 tresillo rhythm, locking in with the dembow drums.",
+    recipe: [
+      "Long 808 or sine bass with a short pitch drop.",
+      "Play it on 16th steps 1, 4 and 7 of each half-bar (the 3+3+2 tresillo).",
+      "Follow simple minor chord roots.",
+      "Keep it clean and big; light saturation helps on phones."
+    ],
+    plugins: [
+      { name: "FL 808 samples", where: "FL", note: "Packs → Drums / 808" },
+      { name: "3x Osc", where: "FL", note: "Sine sub" },
+      { name: "Vital", where: "Free", note: "Sine + pitch envelope" }
+    ],
+    inFL: true,
+    tutorials: ["reggaeton bass 808 tutorial", "how to make reggaeton beat bass"],
+    examples: [
+      { artist: "Bad Bunny & Jhay Cortez", track: "DÁKITI", year: 2020, yt: "TmKh7lAwnBI", t: 0 },
+      { artist: "Daddy Yankee", track: "Gasolina", year: 2004, yt: "CCF1_jI8Prk", t: 0 }
+    ]
+  },
+  {
+    id: "regpluck", name: "Plucked guitar melody", aka: "Reggaeton pluck",
+    genre: "reggaeton", also: ["Latin pop", "Moombahton"], type: "Synth",
+    listen: "A bright, plucked nylon-string guitar (or pluck synth) playing a catchy minor-key melody over the dembow.",
+    recipe: [
+      "Nylon/acoustic guitar sample or a pluck synth with a fast decay.",
+      "Write a short minor-key hook that repeats.",
+      "Leave space so the dembow bounce shows through.",
+      "Add a little reverb."
+    ],
+    plugins: [
+      { name: "FL Keys / FLEX presets", where: "FL", note: "Plucked sounds" },
+      { name: "Spitfire LABS", where: "Free", note: "Free guitar and plucked instruments" },
+      { name: "Vital", where: "Free", note: "Pluck patch" }
+    ],
+    inFL: true,
+    tutorials: ["reggaeton guitar melody tutorial", "how to make reggaeton melody fl studio"],
+    examples: [
+      { artist: "Luis Fonsi feat. Daddy Yankee", track: "Despacito", year: 2017, yt: "kJQP7kiw5Fk", t: 0 },
+      { artist: "Bad Bunny & Jhay Cortez", track: "DÁKITI", year: 2020, yt: "TmKh7lAwnBI", t: 0 }
+    ]
+  },
+  {
+    id: "regtag", name: "Reggaeton ad-libs & DJ tags", aka: "Dale!, shouted hype vocals",
+    genre: "reggaeton", also: ["Latin trap", "Dancehall"], type: "Vocal",
+    listen: "Shouted hype words and catchphrases (Dale!, artist names, yeah yeah) dropped over the beat, often with echo. This is a recording, so the card plays a real example.",
+    recipe: [
+      "Record short shouted phrases and the artist/producer's name.",
+      "Place them at the start of sections and in gaps.",
+      "Add delay throws and a little distortion.",
+      "Keep them consistent so they become a signature."
+    ],
+    plugins: [
+      { name: "Fruity Delay 3", where: "FL", note: "Echo throws" },
+      { name: "Edison", where: "FL", note: "Cut and place phrases" }
+    ],
+    inFL: true,
+    tutorials: ["reggaeton vocal adlibs mixing", "how to make a producer tag"],
+    examples: [
+      { artist: "Daddy Yankee", track: "Gasolina", year: 2004, yt: "CCF1_jI8Prk", t: 0 },
+      { artist: "Don Omar feat. Lucenzo", track: "Danza Kuduro", year: 2010, yt: "7zp1TbLFPp8", t: 0 }
+    ]
+  },
+  // ---------- trap ----------
+  {
+    id: "hatrolls", name: "Trap hi-hat rolls", aka: "Hat rolls, triplet hats",
+    genre: "trap", also: ["Drill", "Hyperpop", "Rage"], type: "Drums",
+    listen: "Rapid-fire hi-hats that suddenly speed up into stuttering rolls (triplets, 32nds, sometimes rising in pitch) over slow half-time drums at ≈130–150 BPM.",
+    recipe: [
+      "Tempo 130–150 BPM, half-time feel (clap/snare on beat 3).",
+      "Hats in 8ths or 16ths as the base.",
+      "Add rolls: 1/16 triplets, 1/32s, and pitch them up or down.",
+      "Vary velocity so they don't sound robotic."
+    ],
+    plugins: [
+      { name: "FPC + piano roll", where: "FL", note: "Draw rolls or use Chop" },
+      { name: "FL Studio hat samples", where: "FL", note: "Packs → Drums" }
+    ],
+    inFL: true,
+    tutorials: ["trap hi hat rolls fl studio", "how to program trap hats"],
+    examples: [
+      { artist: "Migos feat. Lil Uzi Vert", track: "Bad and Boujee", year: 2016, yt: "S-sJp1FfG7Q", t: 0 },
+      { artist: "Future", track: "Mask Off", year: 2017, yt: "xvZqHgFz51I", t: 0 }
+    ]
+  },
+  {
+    id: "glide808", name: "Trap 808 glide", aka: "808 slide",
+    genre: "trap", also: ["Drill", "Hip hop", "Latin trap"], type: "Bass",
+    listen: "A long, deep 808 bass that slides smoothly up and down between notes, booming under the beat. Cleaner than the hyperpop version.",
+    recipe: [
+      "A long 808 sample or sine with a slight pitch drop.",
+      "Turn on glide/portamento (FL: slide notes or Fruity Slide).",
+      "Overlap notes so the pitch slides between them.",
+      "Light saturation so it's audible on small speakers."
+    ],
+    plugins: [
+      { name: "FL 808 samples + slide notes", where: "FL", note: "Slide notes in the piano roll" },
+      { name: "Fruity Soft Clipper", where: "FL", note: "Gentle saturation" },
+      { name: "Vital", where: "Free", note: "Sine + glide" }
+    ],
+    inFL: true,
+    tutorials: ["how to make 808 glides fl studio", "808 slide tutorial"],
+    examples: [
+      { artist: "Travis Scott feat. Drake", track: "SICKO MODE", year: 2018, yt: "6ONRf7h3Mdk", t: 0 },
+      { artist: "Lil Uzi Vert", track: "XO Tour Llif3", year: 2017, yt: "WrsFXgQk5UI", t: 0 }
+    ]
+  },
+  {
+    id: "trapmelody", name: "Dark flute / bell melody", aka: "Trap loop, minor flute",
+    genre: "trap", also: ["Drill", "Hip hop"], type: "Synth",
+    listen: "A short, moody minor-key loop on a breathy flute or a glassy bell, repeating hypnotically over the drums.",
+    recipe: [
+      "Pick a dark minor or phrygian scale.",
+      "Write a 1–2 bar hook on flute, bell or piano.",
+      "Repeat it with tiny variations; leave space for vocals.",
+      "Reverb and maybe a low-pass to make it moody."
+    ],
+    plugins: [
+      { name: "FL Keys / FLEX presets", where: "FL", note: "Bells and keys" },
+      { name: "Spitfire LABS", where: "Free", note: "Free flutes and bells" },
+      { name: "Vital", where: "Free", note: "FM bell patch" }
+    ],
+    inFL: true,
+    tutorials: ["how to make dark trap melodies", "metro boomin melody tutorial"],
+    examples: [
+      { artist: "Future", track: "Mask Off", year: 2017, yt: "xvZqHgFz51I", t: 0, note: "The famous flute loop" },
+      { artist: "Lil Uzi Vert", track: "XO Tour Llif3", year: 2017, yt: "WrsFXgQk5UI", t: 0 }
+    ]
+  },
+  {
+    id: "traptag", name: "Producer tag", aka: "Beat tag, signature drop",
+    genre: "trap", also: ["Hip hop", "Drill", "Reggaeton"], type: "Vocal",
+    listen: "A short spoken phrase or sound at the start of a track that tells you who made the beat: a producer's audio signature. This is a recording, so the card plays a real example.",
+    recipe: [
+      "Record a short catchphrase (or have someone say it).",
+      "Process it with pitch, reverb or distortion so it's distinctive.",
+      "Put it at the very start or just before the drop.",
+      "Use the same tag on every beat."
+    ],
+    plugins: [
+      { name: "Edison", where: "FL", note: "Record and edit the tag" },
+      { name: "Fruity Reeverb 2 / Fruity Delay 3", where: "FL", note: "Make it big" }
+    ],
+    inFL: true,
+    tutorials: ["how to make a producer tag fl studio"],
+    examples: [
+      { artist: "Future (prod. Metro Boomin)", track: "Mask Off", year: 2017, yt: "xvZqHgFz51I", t: 0 },
+      { artist: "Migos (prod. Metro Boomin)", track: "Bad and Boujee", year: 2016, yt: "S-sJp1FfG7Q", t: 0 }
+    ]
+  },
+// ---------- classic breaks ----------
+  {
+    id: "think", name: "Think break", aka: "Think (About It) break, Yeah! Woo!",
+    genre: "jungle", also: ["Hip hop", "Breakbeat", "Drum & bass", "Big beat"], type: "Drums",
+    listen: "A tight, funky drum break with sharp snares and the shouted 'Yeah!' and 'Woo!' vocal hits on top. Sped up, it drives countless jungle and hip hop tracks. This is a recording, so the card plays the real thing.",
+    recipe: [
+      "Find the drum break in Lyn Collins' 'Think (About It)' (1972).",
+      "Slice every hit (or use the whole loop) in a slicer.",
+      "For jungle, speed it up to 160–175 BPM and rearrange slices; keep the 'Yeah! Woo!' hits as accents.",
+      "For hip hop, leave it near its original 95–115 BPM."
+    ],
+    plugins: [
+      { name: "Fruity Slicer / Slicex", where: "FL", note: "Slice the break" },
+      { name: "Edison", where: "FL", note: "Find and cut the loop" }
+    ],
+    inFL: true,
+    tutorials: ["think break chopping tutorial", "how to chop breaks for jungle"],
+    examples: [
+      { artist: "Lyn Collins", track: "Think (About It)", year: 1972, yt: "vCByeJsq65M", t: 0, note: "Use 📍 Set start once you find the break" }
+    ]
+  },
+  {
+    id: "apache", name: "Apache break", aka: "Bongo break",
+    genre: "jungle", also: ["Hip hop", "Breakbeat", "B-boy"], type: "Drums",
+    listen: "A rolling, swinging drum break layered with busy bongos and congas, giving it a percussive, tumbling feel. The anthem of b-boy breaking. This is a recording, so the card plays the real thing.",
+    recipe: [
+      "Find the drums-and-bongos section of 'Apache' (1973).",
+      "Loop or slice it; the bongos give extra rhythm between the hits.",
+      "Speed up for jungle, keep slower for hip hop.",
+      "Layer under a new kick for weight if needed."
+    ],
+    plugins: [
+      { name: "Fruity Slicer / Slicex", where: "FL", note: "Slice the break" },
+      { name: "Edison", where: "FL", note: "Find and cut the loop" }
+    ],
+    inFL: true,
+    tutorials: ["apache break chop tutorial", "how to use breakbeats fl studio"],
+    examples: [
+      { artist: "Incredible Bongo Band", track: "Apache", year: 1973, yt: "-Udnb6F1A0g", t: 0 }
+    ]
+  },
+  {
+    id: "funkydrummer", name: "Funky Drummer break", aka: "Clyde Stubblefield break",
+    genre: "jungle", also: ["Hip hop", "Breakbeat", "Big beat"], type: "Drums",
+    listen: "A loose, laid-back funk groove with ghost-note snares and syncopated hats played by Clyde Stubblefield. Lighter and groovier than the Amen. This is a recording, so the card plays the real thing.",
+    recipe: [
+      "Find the solo drum break near the end of 'Funky Drummer' (1970).",
+      "Loop a bar or two; keep the ghost notes for groove.",
+      "Hip hop: use as is. Jungle/breakbeat: speed up and chop.",
+      "Compress it to bring out the ghost notes."
+    ],
+    plugins: [
+      { name: "Fruity Slicer / Slicex", where: "FL", note: "Slice the break" },
+      { name: "Fruity Compressor", where: "FL", note: "Bring out ghost notes" }
+    ],
+    inFL: true,
+    tutorials: ["funky drummer break sampling tutorial", "most sampled drum breaks"],
+    examples: [
+      { artist: "James Brown", track: "Funky Drummer (Pt. 1 & 2)", year: 1970, yt: "QXw6YZltKJk", t: 0, note: "The break comes near the end: use 📍 Set start" }
+    ]
+  },
+  {
+    id: "hotpants", name: "Hot Pants break", aka: "I'm Coming break",
+    genre: "jungle", also: ["Hip hop", "Breakbeat", "Drum & bass"], type: "Drums",
+    listen: "A punchy, crisp funk break with a snappy snare and open hi-hats, heard in lots of early-90s jungle and hardcore. This is a recording, so the card plays the real thing.",
+    recipe: [
+      "Find the drum break in Bobby Byrd's 'Hot Pants' (1971).",
+      "Slice and resequence at jungle tempo.",
+      "Layer with the Amen or Think for a busier break.",
+      "Add some saturation for a dusty 90s feel."
+    ],
+    plugins: [
+      { name: "Fruity Slicer / Slicex", where: "FL", note: "Slice the break" },
+      { name: "Fruity Fast Dist", where: "FL", note: "Dusty grit" }
+    ],
+    inFL: true,
+    tutorials: ["jungle break layering tutorial"],
+    examples: [
+      { artist: "Bobby Byrd", track: "Hot Pants - I'm Coming, Coming, I'm Coming", year: 1971, yt: "EvCYVzb5P-4", t: 0 }
+    ]
+  },
+  // ---------- dub ----------
+  {
+    id: "onedrop", name: "One drop riddim", aka: "One drop",
+    genre: "dub", also: ["Roots reggae", "Dubstep"], type: "Drums",
+    listen: "A slow, relaxed reggae beat (≈70–80 BPM) where the kick and rimshot land together on beat 3 only. Beat 1 is left empty, which gives it a floating, laid-back feel.",
+    recipe: [
+      "Tempo around 70–80 BPM.",
+      "No kick on beat 1: kick and rimshot (cross-stick) together on beat 3.",
+      "Swung/shuffled hi-hats in 8ths or triplets.",
+      "Leave lots of space for bass and echoes."
+    ],
+    plugins: [
+      { name: "FPC", where: "FL", note: "Drum pads" },
+      { name: "Channel rack swing", where: "FL", note: "Shuffle the hats" }
+    ],
+    inFL: true,
+    tutorials: ["one drop reggae drum pattern", "how to make reggae drums fl studio"],
+    examples: [
+      { artist: "Bob Marley & The Wailers", track: "One Drop", year: 1979, yt: "e3W3TDUzeNc", t: 0 },
+      { artist: "Scientist", track: "Dance of the Vampires", year: 1981, yt: "mswVkpgX8EU", t: 0 }
+    ]
+  },
+  {
+    id: "skank", name: "Off-beat skank & organ bubble", aka: "Skank, bubble",
+    genre: "dub", also: ["Roots reggae", "Ska", "Dancehall"], type: "Synth",
+    listen: "Short, choppy guitar chords on the off-beats ('chk... chk...') with a bubbling organ bouncing in between: the rhythm engine of reggae, chopped up and echoed in dub.",
+    recipe: [
+      "Guitar (or keys): short, muted chords on beats 2 and 4 (the off-beats).",
+      "Organ 'bubble': quick alternating low/high chord notes in a shuffled 8th pattern.",
+      "In dub, mute them in and out and send hits to delay and spring reverb.",
+      "Keep them bright and thin so the bass has room."
+    ],
+    plugins: [
+      { name: "FL Keys / FLEX", where: "FL", note: "Organ and guitar presets" },
+      { name: "Fruity Delay 3 + Fruity Reeverb 2", where: "FL", note: "Dub throws" },
+      { name: "Spitfire LABS", where: "Free", note: "Free guitar and keys" }
+    ],
+    inFL: true,
+    tutorials: ["reggae skank guitar and organ bubble tutorial", "how to make dub reggae fl studio"],
+    examples: [
+      { artist: "Augustus Pablo & King Tubby", track: "King Tubby Meets Rockers Uptown", year: 1976, yt: "NoXYJkOeYSM", t: 0 },
+      { artist: "Bob Marley & The Wailers", track: "One Drop", year: 1979, yt: "e3W3TDUzeNc", t: 0 }
+    ]
+  },
+  {
+    id: "dubbass", name: "Rolling dub bassline", aka: "Reggae bass",
+    genre: "dub", also: ["Roots reggae", "Dubstep", "Jungle"], type: "Bass",
+    listen: "A deep, round, melodic bassline that sings a short phrase over and over. It's the lead instrument in dub: loud, warm and rolling, with the drums and echoes around it.",
+    recipe: [
+      "Warm, round tone: sine/triangle or a muted bass guitar, low-passed.",
+      "Write a catchy 1–2 bar melodic phrase with rests.",
+      "Make it the loudest thing in the mix.",
+      "Strip everything else back to it in the 'dub' sections."
+    ],
+    plugins: [
+      { name: "3x Osc", where: "FL", note: "Sine + triangle, low-passed" },
+      { name: "FL Keys / BooBass", where: "FL", note: "Round bass tones" },
+      { name: "Vital", where: "Free", note: "Warm sub patch" }
+    ],
+    inFL: true,
+    tutorials: ["how to write a reggae dub bassline", "dub bass sound tutorial"],
+    examples: [
+      { artist: "The Revolutionaries", track: "Kunta Kinte Dub", year: 1976, yt: "K6XDIje4vJU", t: 0 },
+      { artist: "Scientist", track: "Dance of the Vampires", year: 1981, yt: "mswVkpgX8EU", t: 0 }
+    ]
+  },
+  {
+    id: "melodica", name: "Melodica lead", aka: "Far East sound",
+    genre: "dub", also: ["Roots reggae", "Steppas"], type: "Synth",
+    listen: "A reedy, slightly wheezy keyboard-harmonica tone playing mournful minor melodies, drenched in echo. Made famous by Augustus Pablo.",
+    recipe: [
+      "A reed-like tone: square/saw through a band-pass filter, or a melodica sample.",
+      "Gentle vibrato and a soft attack.",
+      "Minor-key melodies with long notes.",
+      "Lots of delay and spring reverb."
+    ],
+    plugins: [
+      { name: "FL Keys / FLEX", where: "FL", note: "Reed/harmonica-style presets" },
+      { name: "Vital", where: "Free", note: "Band-passed square + vibrato" },
+      { name: "Spitfire LABS", where: "Free", note: "Free woodwind/reed sounds" }
+    ],
+    inFL: true,
+    tutorials: ["augustus pablo melodica sound", "dub melodica synth patch"],
+    examples: [
+      { artist: "Augustus Pablo & King Tubby", track: "King Tubby Meets Rockers Uptown", year: 1976, yt: "NoXYJkOeYSM", t: 0 }
+    ]
+  },
+  // ---------- steppas ----------
+  {
+    id: "steppersbeat", name: "Steppers beat", aka: "Steppas rhythm, rockers",
+    genre: "steppas", also: ["Dub", "Roots reggae", "UK sound system"], type: "Drums",
+    listen: "A marching, militant reggae beat: a kick on every beat with the rimshot/snare on beat 3, at about 70–75 BPM (felt as 140–150). Heavier and more driving than one drop.",
+    recipe: [
+      "Tempo 70–75 BPM (or program at 140–150 in half-time).",
+      "Kick on every beat (four-to-the-floor).",
+      "Rimshot or snare on beat 3, often echoed.",
+      "Busy 16th hats/shakers and tom fills; very heavy sub underneath."
+    ],
+    plugins: [
+      { name: "FPC", where: "FL", note: "Drum pads" },
+      { name: "Fruity Delay 3", where: "FL", note: "Echo the snares" }
+    ],
+    inFL: true,
+    tutorials: ["steppers dub drum pattern", "how to make steppa dub fl studio"],
+    examples: [
+      { artist: "The Revolutionaries", track: "Kunta Kinte Dub", year: 1976, yt: "K6XDIje4vJU", t: 0, note: "Sly Dunbar's classic steppers drumming" },
+      { artist: "Iration Steppas & Tena Stelin", track: "Dub Arena Dub", year: 2014, yt: "PR6D5OYiBk8", t: 0 }
+    ]
+  },
+  {
+    id: "steppasbass", name: "Steppas sub bassline", aka: "Sound-system bass",
+    genre: "steppas", also: ["Dub", "Dubstep", "UK sound system"], type: "Bass",
+    listen: "A huge, deep, repetitive sub-bass riff that drives the whole track on a sound system, locking with the four-to-the-floor steppers kick. Darker and more relentless than roots dub bass.",
+    recipe: [
+      "Deep sine or sine+triangle bass, very little top end.",
+      "Repetitive 1–2 bar riff in 8th notes, often minor and militant.",
+      "Lock it to the steppers kick.",
+      "Mix it loud: it's meant for big sound-system speakers."
+    ],
+    plugins: [
+      { name: "3x Osc", where: "FL", note: "Sine bass" },
+      { name: "Fruity Limiter", where: "FL", note: "Control the low end" },
+      { name: "Vital", where: "Free", note: "Sub patch" }
+    ],
+    inFL: true,
+    tutorials: ["steppa dub bassline tutorial", "uk dub sound system bass"],
+    examples: [
+      { artist: "Iration Steppas & Tena Stelin", track: "Dub Arena Dub", year: 2014, yt: "PR6D5OYiBk8", t: 0 },
+      { artist: "Jah Shaka", track: "African Beat", year: 1991, yt: "iRi2jNa8fX4", t: 0 }
+    ]
+  }
 ];
 
 window.GENRES = {
@@ -904,5 +1290,13 @@ window.GENRES = {
   acidhouse: { label: "Acid House", color: "#c8ff3d" },
   acidtechno: { label: "Acid Techno", color: "#c0c7d6" },
   dubtechno: { label: "Dub Techno", color: "#6fbf73" },
-  complextro: { label: "Complextro", color: "#ff6af0" }
+  complextro: { label: "Complextro", color: "#ff6af0" },
+  reggaeton: { label: "Reggaeton", color: "#e0a050" },
+  trap: { label: "Trap", color: "#8a94ff" },
+  dub: { label: "Dub", color: "#06d6a0" },
+  steppas: { label: "Steppas", color: "#ff9e00" },
+  reggaeton: { label: "Reggaeton", color: "#e0a050" },
+  trap: { label: "Trap", color: "#8a94ff" },
+  dub: { label: "Dub", color: "#06d6a0" },
+  steppas: { label: "Steppas", color: "#ff9e00" }
 };

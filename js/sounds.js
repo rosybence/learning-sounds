@@ -532,24 +532,6 @@
     return dur + 0.3;
   };
 
-  R.speedbass = (ac, out, t) => {
-    const st = 60 / 130 / 4, dur = 32 * st;
-    for (let i = 0; i < 32; i += 4) kick(ac, out, t + i * st, { vol: 0.85, decay: 0.28 });
-    [4, 12, 20, 28].forEach(i => clap(ac, out, t + i * st, 0.35));
-    for (let i = 2; i < 32; i += 4) hat(ac, out, t + i * st + st * 0.15, { open: true, vol: 0.12 });
-    const lp = ac.createBiquadFilter(); lp.type = "lowpass"; lp.Q.value = 4;
-    const g = ac.createGain(); g.gain.value = 0.0001; lp.connect(g); g.connect(drive(ac, out, 1.8));
-    const o1 = osc(ac, "sawtooth", midi(33), lp, t, t + dur, -10), o2 = osc(ac, "sawtooth", midi(33), lp, t, t + dur, 10), o3 = osc(ac, "square", midi(21), lp, t, t + dur);
-    const pat = [[2, 33, 2], [6, 33, 1], [7, 36, 2], [10, 33, 2], [14, 31, 2], [18, 33, 2], [22, 33, 1], [23, 40, 2], [26, 38, 2], [30, 36, 2]];
-    pat.forEach(([i, n, l]) => {
-      const s0 = t + i * st, e0 = s0 + l * st * 0.95, f = midi(n);
-      [[o1, 1], [o2, 1], [o3, 0.5]].forEach(([o, m]) => { o.frequency.setValueAtTime(f * m * 2.2, s0); o.frequency.exponentialRampToValueAtTime(f * m, s0 + 0.09); });
-      g.gain.setValueAtTime(0.0001, s0); g.gain.exponentialRampToValueAtTime(0.3, s0 + 0.008); g.gain.setValueAtTime(0.3, e0 - 0.02); g.gain.exponentialRampToValueAtTime(0.0001, e0);
-      lp.frequency.setValueAtTime(3500, s0); lp.frequency.exponentialRampToValueAtTime(350, s0 + 0.25);
-    });
-    return dur + 0.3;
-  };
-
   R.electrobass = (ac, out, t) => {
     const st = 60 / 118 / 4, dur = 32 * st;
     for (let b = 0; b < 2; b++) {
@@ -657,28 +639,6 @@
 
 
   // ---------- bassline / speed garage / acid / dub techno ----------
-  R.warpbass = (ac, out, t) => {
-    const st = 60 / 138 / 4, dur = 32 * st, sw = st * 0.3;
-    const at = i => t + i * st + (i % 2 ? sw : 0);
-    for (let i = 0; i < 32; i += 4) kick(ac, out, at(i), { vol: 0.85, decay: 0.25 });
-    [4, 12, 20, 28].forEach(i => clap(ac, out, at(i), 0.4));
-    for (let i = 2; i < 32; i += 4) hat(ac, out, at(i), { open: true, vol: 0.11 });
-    for (let i = 1; i < 32; i += 2) hat(ac, out, at(i), { vol: 0.07 });
-    const lp = ac.createBiquadFilter(); lp.type = "lowpass"; lp.Q.value = 10; lp.frequency.value = 900;
-    const lfo = ac.createOscillator(); lfo.frequency.value = 138 / 60 * 2; const dep = ac.createGain(); dep.gain.value = 700;
-    lfo.connect(dep); dep.connect(lp.frequency); lfo.start(t); lfo.stop(t + dur);
-    const g = ac.createGain(); g.gain.value = 0.0001; lp.connect(g); g.connect(drive(ac, gainNode(ac, out, 0.8), 3));
-    const o1 = osc(ac, "square", midi(41), lp, t, t + dur, -8), o2 = osc(ac, "sawtooth", midi(53), lp, t, t + dur, 8);
-    const pat = [[2, 41, 2], [5, 41, 1], [6, 53, 2], [10, 44, 1], [11, 46, 3], [14, 48, 2], [18, 41, 2], [21, 41, 1], [22, 53, 2], [26, 39, 2], [28, 51, 1], [29, 39, 3]];
-    pat.forEach(([i, n, l]) => {
-      const s0 = at(i), e0 = s0 + l * st * 0.95;
-      o1.frequency.setValueAtTime(midi(n), s0); o2.frequency.setValueAtTime(midi(n + 12), s0);
-      g.gain.setValueAtTime(0.0001, s0); g.gain.exponentialRampToValueAtTime(0.28, s0 + 0.006); g.gain.setValueAtTime(0.28, e0 - 0.02); g.gain.exponentialRampToValueAtTime(0.0001, e0);
-      if (l >= 2) lfo.frequency.setValueAtTime(138 / 60 * 4, s0); else lfo.frequency.setValueAtTime(138 / 60 * 2, s0);
-    });
-    return dur + 0.3;
-  };
-
   R.sgbeat = (ac, out, t) => {
     const st = 60 / 132 / 4, sw = st * 0.38;
     const at = i => t + i * st + (i % 2 ? sw : 0);
@@ -705,13 +665,6 @@
     n.connect(lp); lp.connect(g); g.connect(out); n.start(st, Math.random()); n.stop(st + 0.4);
     kick(ac, out, st, { f0: 120, f1: 40, decay: 0.5, vol: 0.9, click: false });
   }
-  R.gunshot = (ac, out, t) => {
-    const bus = reverb(ac, out, 3, 0.5);
-    airhorn(ac, bus, t, 0.18); airhorn(ac, bus, t + 0.28, 0.18); airhorn(ac, bus, t + 0.56, 0.7);
-    gunshot(ac, bus, t + 1.6); gunshot(ac, bus, t + 2.1);
-    return 4.6;
-  };
-
   R.house909 = (ac, out, t) => {
     const st = 60 / 124 / 4, sw = st * 0.12;
     const at = i => t + i * st + (i % 2 ? sw : 0);
@@ -872,6 +825,174 @@
     const blp = ac.createBiquadFilter(); bo.disconnect(); bo.connect(blp); blp.type = "lowpass"; blp.frequency.value = 400; blp.connect(bg);
     [[0, 33], [16, 29], [32, 31]].forEach(([i, n]) => bo.frequency.setValueAtTime(midi(n), t + i * st));
     return dur + 0.4;
+  };
+
+  // ---------- reggaeton / trap ----------
+  function dembowDrums(ac, out, t, st, bars, vol = 1) {
+    for (let b = 0; b < bars; b++) {
+      const bt = t + b * 16 * st;
+      for (let i = 0; i < 16; i += 4) kick(ac, out, bt + i * st, { f0: 140, f1: 50, decay: 0.3, vol: 0.9 * vol });
+      [3, 6, 11, 14].forEach(i => snare(ac, out, bt + i * st, { vol: 0.65 * vol, tone: 260, decay: 0.12, bright: 2500 }));
+      for (let i = 0; i < 16; i += 2) hat(ac, out, bt + i * st, { vol: (i % 4 ? 0.08 : 0.12) * vol, freq: 8500 });
+      if (b === bars - 1) [13, 15].forEach(i => rim(ac, out, bt + i * st, 0.2 * vol));
+    }
+  }
+  R.dembow = (ac, out, t) => { const st = 60 / 95 / 4; dembowDrums(ac, out, t, st, 3); return 48 * st + 0.3; };
+
+  function boom808(ac, out, s0, f, len, vol = 0.5) {
+    const g = ac.createGain(); g.gain.setValueAtTime(0.0001, s0); g.gain.exponentialRampToValueAtTime(vol, s0 + 0.005); g.gain.setTargetAtTime(vol * 0.6, s0 + 0.05, 0.25); g.gain.setTargetAtTime(0.0001, s0 + len - 0.04, 0.02);
+    g.connect(out); const o = osc(ac, "sine", f * 2, g, s0, s0 + len + 0.1); o.frequency.exponentialRampToValueAtTime(f, s0 + 0.05); return o;
+  }
+  R.regbass = (ac, out, t) => {
+    const st = 60 / 95 / 4, bars = 2;
+    dembowDrums(ac, out, t, st, bars, 0.6);
+    const d = drive(ac, gainNode(ac, out, 0.9), 1.6);
+    const roots = [35, 31, 33, 30];
+    for (let h = 0; h < bars * 2; h++) [0, 3, 6].forEach((i, k) => boom808(ac, d, t + (h * 8 + i) * st, midi(roots[h]), (k === 2 ? 2 : 3) * st * 0.95, 0.55));
+    return bars * 16 * st + 0.4;
+  };
+
+  // Karplus–Strong plucked string
+  function pluckBuf(ac, f, dur = 1.2) {
+    const sr = ac.sampleRate, n = Math.round(sr / f), len = Math.floor(sr * dur);
+    const b = ac.createBuffer(1, len, sr), y = b.getChannelData(0);
+    for (let i = 0; i < n; i++) y[i] = Math.random() * 2 - 1;
+    for (let i = n; i < len; i++) y[i] = 0.497 * (y[i - n] + y[Math.max(0, i - n - 1)]);
+    return b;
+  }
+  R.regpluck = (ac, out, t) => {
+    const st = 60 / 95 / 4, bars = 2;
+    dembowDrums(ac, out, t, st, bars, 0.5);
+    const bus = reverb(ac, out, 1.6, 0.25);
+    const mel = [[0, 71], [2, 74], [3, 73], [6, 71], [8, 69], [10, 71], [11, 66], [14, 69], [16, 71], [18, 74], [19, 76], [22, 74], [24, 73], [26, 71], [27, 69], [30, 66]];
+    mel.forEach(([i, n]) => { const s0 = t + i * st, src = ac.createBufferSource(); src.buffer = pluckBuf(ac, midi(n));
+      const hp = ac.createBiquadFilter(); hp.type = "highpass"; hp.frequency.value = 150; const g = gainNode(ac, bus, 0.55); src.connect(hp); hp.connect(g); src.start(s0); });
+    return bars * 16 * st + 1;
+  };
+
+  function trapKit(ac, out, t, st, bars, rolls = false) {
+    for (let b = 0; b < bars; b++) {
+      const bt = t + b * 16 * st;
+      [0, 10].forEach(i => kick(ac, out, bt + i * st, { f0: 150, f1: 55, decay: 0.25, vol: 0.8 }));
+      clap(ac, out, bt + 8 * st, 0.6); snare(ac, out, bt + 8 * st, { vol: 0.45, tone: 220 });
+      for (let i = 0; i < 16; i += 2) hat(ac, out, bt + i * st, { vol: 0.11, freq: 9000 });
+      if (rolls) {
+        for (let k = 0; k < 6; k++) hat(ac, out, bt + (4 + k * 2 / 3) * st, { vol: 0.09, freq: 9000 });
+        for (let k = 0; k < 8; k++) hat(ac, out, bt + (12 + k * 0.5) * st, { vol: 0.06 + k * 0.008, freq: 7000 + k * 400 });
+      }
+    }
+  }
+  R.hatrolls = (ac, out, t) => { const st = 60 / 140 / 4; trapKit(ac, out, t, st, 2, true); return 32 * st + 0.3; };
+
+  R.glide808 = (ac, out, t) => {
+    const st = 60 / 140 / 4, bars = 2, dur = bars * 16 * st;
+    trapKit(ac, out, t, st, bars, false);
+    const g = ac.createGain(); g.gain.value = 0.0001; g.connect(drive(ac, gainNode(ac, out, 0.9), 1.5));
+    const o = osc(ac, "sine", midi(36), g, t, t + dur);
+    const notes = [[0, 36], [8, 43], [12, 41], [16, 36], [22, 34], [26, 39]];
+    notes.forEach(([i, n], k) => {
+      const s0 = t + i * st;
+      if (k === 0) { o.frequency.setValueAtTime(midi(n) * 2, s0); o.frequency.exponentialRampToValueAtTime(midi(n), s0 + 0.05); }
+      else o.frequency.setTargetAtTime(midi(n), s0, 0.05);
+      g.gain.setValueAtTime(0.5, s0); g.gain.setTargetAtTime(0.32, s0 + 0.05, 0.4);
+    });
+    g.gain.setTargetAtTime(0.0001, t + dur - 0.1, 0.05);
+    return dur + 0.3;
+  };
+
+  R.trapmelody = (ac, out, t) => {
+    const st = 60 / 140 / 4, bars = 2;
+    trapKit(ac, out, t, st, bars, true);
+    const bus = reverb(ac, out, 2.4, 0.35);
+    [[0, 66, 3], [3, 69, 1], [4, 71, 4], [8, 69, 2], [10, 66, 2], [12, 64, 4]].forEach(([i, n, l]) => {
+      const s0 = t + i * st, e0 = s0 + l * st * 0.95, g = ac.createGain(); env(g.gain, s0, 0.16, 0.05, 0.1, 0.13, e0); g.connect(bus);
+      const o = osc(ac, "triangle", midi(n), g, s0, e0 + 0.05); const l2 = ac.createOscillator(); l2.frequency.value = 5; const lg = ac.createGain(); lg.gain.value = 12; l2.connect(lg); lg.connect(o.detune); l2.start(s0); l2.stop(e0);
+      const nz = noise(ac); const bp = ac.createBiquadFilter(); bp.type = "bandpass"; bp.frequency.value = midi(n) * 3; bp.Q.value = 2; const ng = ac.createGain(); env(ng.gain, s0, 0.05, 0.03, 0.08, 0.02, e0);
+      nz.connect(bp); bp.connect(ng); ng.connect(bus); nz.start(s0, Math.random()); nz.stop(e0 + 0.05);
+    });
+    [[16, 78], [18, 76], [20, 73], [23, 71], [24, 73], [26, 76], [28, 71], [30, 69]].forEach(([i, n]) => {
+      const s0 = t + i * st, f = midi(n), car = ac.createOscillator(); car.frequency.value = f;
+      const m = ac.createOscillator(); m.frequency.value = f * 3.5; const ix = ac.createGain(); ix.gain.setValueAtTime(f * 1.5, s0); ix.gain.exponentialRampToValueAtTime(1, s0 + 1);
+      m.connect(ix); ix.connect(car.frequency); const g = ac.createGain(); env(g.gain, s0, 0.16, 0.002, 1.2); car.connect(g); g.connect(bus);
+      car.start(s0); m.start(s0); car.stop(s0 + 1.3); m.stop(s0 + 1.3);
+    });
+    return 32 * st + 1.4;
+  };
+
+  // ---------- dub / steppas ----------
+  function oneDropDrums(ac, out, t, st, bars, vol = 1) {
+    const sw = st * 0.33, bus = delay(ac, out, st * 3, 0.45, 2000, 0.35);
+    for (let b = 0; b < bars; b++) {
+      const bt = t + b * 16 * st;
+      kick(ac, out, bt + 8 * st, { f0: 110, f1: 48, decay: 0.45, vol: 0.9 * vol, click: false });
+      rim(ac, bus, bt + 8 * st, 0.35 * vol);
+      for (let i = 0; i < 16; i += 2) hat(ac, out, bt + i * st + (i % 4 ? sw : 0), { vol: (i % 4 ? 0.07 : 0.1) * vol, freq: 7000 });
+    }
+  }
+  function steppersDrums(ac, out, t, st, bars, vol = 1) {
+    const bus = delay(ac, out, st * 3, 0.5, 2000, 0.4);
+    for (let b = 0; b < bars; b++) {
+      const bt = t + b * 16 * st;
+      for (let i = 0; i < 16; i += 4) kick(ac, out, bt + i * st, { f0: 110, f1: 46, decay: 0.45, vol: 0.95 * vol, click: false });
+      snare(ac, bus, bt + 8 * st, { vol: 0.5 * vol, tone: 240, decay: 0.12 }); rim(ac, bus, bt + 8 * st, 0.3 * vol);
+      for (let i = 0; i < 16; i++) hat(ac, out, bt + i * st, { vol: (i % 2 ? 0.05 : 0.08) * vol, freq: 7500 });
+      if (b === bars - 1) [12, 13, 14, 15].forEach((i, k) => kick(ac, out, bt + i * st, { f0: 220 - k * 30, f1: 120 - k * 15, decay: 0.15, vol: 0.4 * vol, click: false }));
+    }
+  }
+  function warmBass(ac, out, s0, f, len, vol = 0.45) {
+    const g = ac.createGain(); env(g.gain, s0, vol, 0.01, 0.08, vol * 0.85, s0 + len);
+    const lp = ac.createBiquadFilter(); lp.type = "lowpass"; lp.frequency.value = 500; lp.connect(g); g.connect(out);
+    osc(ac, "sine", f, lp, s0, s0 + len + 0.05); osc(ac, "triangle", f, gainNode(ac, lp, 0.5), s0, s0 + len + 0.05);
+  }
+  R.onedrop = (ac, out, t) => {
+    const st = 60 / 76 / 4; oneDropDrums(ac, out, t, st, 2);
+    [[0, 38, 3], [4, 38, 1], [6, 41, 2], [8, 43, 4], [14, 41, 2], [16, 38, 3], [20, 36, 2], [24, 33, 4], [30, 36, 2]].forEach(([i, n, l]) => warmBass(ac, out, t + i * st, midi(n), l * st * 0.9, 0.3));
+    return 32 * st + 0.8;
+  };
+  R.skank = (ac, out, t) => {
+    const st = 60 / 76 / 4; oneDropDrums(ac, out, t, st, 2, 0.6);
+    const spring = reverb(ac, delay(ac, out, st * 3, 0.5, 2500, 0.35), 1.2, 0.35);
+    const chords = [[62, 65, 69], [62, 65, 69], [60, 64, 67], [60, 64, 67]];
+    for (let beat = 0; beat < 8; beat++) {
+      const s0 = t + (beat * 4 + 2) * st, ch = chords[Math.floor(beat / 2) % 4];
+      const g = ac.createGain(); env(g.gain, s0, 0.22, 0.002, 0.08); const bp = ac.createBiquadFilter(); bp.type = "bandpass"; bp.frequency.value = 2200; bp.Q.value = 1;
+      bp.connect(g); g.connect(spring); ch.forEach(n => osc(ac, "sawtooth", midi(n), bp, s0, s0 + 0.12));
+      // organ bubble: low/high alternation in shuffled 8ths
+      [0, 1].forEach(k => { const b0 = t + (beat * 4 + k * 1.33) * st, og = ac.createGain(); env(og.gain, b0, 0.11, 0.004, 0.09); og.connect(out);
+        (k ? ch : ch.map(n => n - 12)).forEach(n => [1, 2].forEach(h => osc(ac, "sine", midi(n) * h, og, b0, b0 + 0.15))); });
+    }
+    return 32 * st + 1;
+  };
+  R.dubbass = (ac, out, t) => {
+    const st = 60 / 76 / 4; oneDropDrums(ac, out, t, st, 2, 0.6);
+    const d = drive(ac, gainNode(ac, out, 0.9), 1.4);
+    [[0, 38, 2], [2, 41, 1], [3, 43, 1], [4, 45, 3], [8, 43, 2], [10, 41, 1], [11, 38, 3], [16, 38, 2], [18, 41, 1], [19, 43, 1], [20, 45, 2], [22, 48, 2], [24, 45, 2], [26, 43, 2], [28, 41, 4]]
+      .forEach(([i, n, l]) => warmBass(ac, d, t + i * st, midi(n), l * st * 0.92, 0.45));
+    return 32 * st + 0.8;
+  };
+  R.melodica = (ac, out, t) => {
+    const st = 60 / 76 / 4; oneDropDrums(ac, out, t, st, 2, 0.5);
+    const bus = reverb(ac, delay(ac, out, st * 3, 0.55, 2500, 0.4), 1.6, 0.3);
+    [[0, 74, 3], [3, 72, 1], [4, 69, 4], [10, 67, 2], [12, 69, 4], [16, 74, 2], [18, 77, 2], [20, 76, 4], [26, 72, 2], [28, 74, 4]].forEach(([i, n, l]) => {
+      const s0 = t + i * st, e0 = s0 + l * st * 0.95, g = ac.createGain(); env(g.gain, s0, 0.24, 0.04, 0.1, 0.2, e0);
+      const bp = ac.createBiquadFilter(); bp.type = "bandpass"; bp.frequency.value = 1400; bp.Q.value = 0.8; bp.connect(g); g.connect(bus);
+      [["square", 0], ["sawtooth", 6]].forEach(([ty, dt]) => { const o = osc(ac, ty, midi(n), bp, s0, e0 + 0.05, dt);
+        const l2 = ac.createOscillator(); l2.frequency.value = 5.5; const lg = ac.createGain(); lg.gain.value = 10; l2.connect(lg); lg.connect(o.detune); l2.start(s0); l2.stop(e0); });
+      const nz = noise(ac); const nb = ac.createBiquadFilter(); nb.type = "bandpass"; nb.frequency.value = 3000; const ng = gainNode(ac, bus, 0.012); nz.connect(nb); nb.connect(ng); nz.start(s0, Math.random()); nz.stop(e0);
+    });
+    return 32 * st + 1.5;
+  };
+  R.steppersbeat = (ac, out, t) => {
+    const st = 60 / 72 / 4; steppersDrums(ac, out, t, st, 2);
+    [0, 4, 8, 12, 16, 20, 24, 28].forEach((i, k) => warmBass(ac, out, t + i * st, midi([33, 33, 36, 31][Math.floor(k / 2)]), 3.6 * st, 0.28));
+    return 32 * st + 1;
+  };
+  R.steppasbass = (ac, out, t) => {
+    const st = 60 / 72 / 4; steppersDrums(ac, out, t, st, 2, 0.75);
+    const d = drive(ac, gainNode(ac, out, 0.95), 1.5);
+    const riff = [[0, 33, 2], [2, 33, 1], [3, 36, 1], [4, 40, 2], [6, 38, 2], [8, 36, 2], [10, 33, 1], [11, 31, 1], [12, 33, 4]];
+    for (let b = 0; b < 2; b++) riff.forEach(([i, n, l]) => warmBass(ac, d, t + (b * 16 + i) * st, midi(n - (b && i >= 12 ? 2 : 0)), l * st * 0.9, 0.5));
+    return 32 * st + 1;
   };
 
   // ---------- public API ----------
