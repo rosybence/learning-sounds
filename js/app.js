@@ -310,5 +310,18 @@
   }
   $("#qAgain").addEventListener("click", showSetup);
 
+  // share saved start times so they can be built into the app
+  window.exportStarts = function () {
+    const lines = [];
+    CARDS.forEach(c => c.examples.forEach((e, i) => { const v = store.get(startKey(c.id, i), null); if (v !== null) lines.push(`${c.id} | ${e.artist} – ${e.track} | ${fmt(v)}`); }));
+    return lines.join("\n");
+  };
+  $("#copyStarts").addEventListener("click", async () => {
+    const txt = window.exportStarts(), btn = $("#copyStarts");
+    if (!txt) { btn.textContent = "No start times saved yet"; setTimeout(() => btn.textContent = "📋 Copy my saved start times", 2000); return; }
+    try { await navigator.clipboard.writeText(txt); btn.textContent = "✓ Copied — paste them to Claude"; }
+    catch (e) { prompt("Copy these start times:", txt); }
+    setTimeout(() => btn.textContent = "📋 Copy my saved start times", 2500);
+  });
   renderFilter(); renderPads();
 })();

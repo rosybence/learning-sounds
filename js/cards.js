@@ -1041,7 +1041,7 @@ window.CARDS = [
     inFL: true,
     tutorials: ["think break chopping tutorial", "how to chop breaks for jungle"],
     examples: [
-      { artist: "Lyn Collins", track: "Think (About It)", year: 1972, yt: "vCByeJsq65M", t: 0, note: "Use 📍 Set start once you find the break" }
+      { artist: "Lyn Collins", track: "Think (About It)", year: 1972, yt: "vCByeJsq65M", t: 81, note: "The break is at 1:21" }
     ]
   },
   {
@@ -1061,7 +1061,7 @@ window.CARDS = [
     inFL: true,
     tutorials: ["apache break chop tutorial", "how to use breakbeats fl studio"],
     examples: [
-      { artist: "Incredible Bongo Band", track: "Apache", year: 1973, yt: "-Udnb6F1A0g", t: 0 }
+      { artist: "Incredible Bongo Band", track: "Apache", year: 1973, yt: "-Udnb6F1A0g", t: 0, note: "The famous bongo and drum intro" }
     ]
   },
   {
@@ -1081,7 +1081,7 @@ window.CARDS = [
     inFL: true,
     tutorials: ["funky drummer break sampling tutorial", "most sampled drum breaks"],
     examples: [
-      { artist: "James Brown", track: "Funky Drummer (Pt. 1 & 2)", year: 1970, yt: "QXw6YZltKJk", t: 0, note: "The break comes near the end: use 📍 Set start" }
+      { artist: "James Brown", track: "Funky Drummer (Pt. 1 & 2)", year: 1970, yt: "QXw6YZltKJk", t: 319, note: "The drum solo is at about 5:19" }
     ]
   },
   {
