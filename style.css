@@ -247,3 +247,4 @@ main { padding: 0 16px 40px; max-width: 1100px; margin: 0 auto; }
 .abbtn { position: relative; overflow: hidden; padding: 9px 12px; border-radius: 9px; font-size: 13px; font-weight: 500; background: var(--panel2); border: 1px solid color-mix(in srgb, var(--c) 50%, var(--line)); color: var(--text); }
 .abbtn.playing { box-shadow: 0 0 0 2px var(--c), 0 0 14px color-mix(in srgb, var(--c) 50%, transparent); }
 .abhint { font-size: 12px !important; margin: 8px 0 0 !important; color: var(--dim) !important; }
+.abvid { margin-top: 8px; }

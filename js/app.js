@@ -274,9 +274,10 @@
     const pair = [card.id, other.id].sort().join("|");
     const note = (window.CONTRASTS || {})[pair];
     const ab = c => SE.has(c.id) ? `<button class="abbtn" data-ab="${c.id}" style="--c:${GENRES[c.genre].color}">▶ ${esc(c.name)}</button>` : "";
+    const vid = c => SE.has(c.id) ? "" : `<div class="abvid"><p class="abhint">${esc(c.name)}:</p>${slotHTML(c, 0)}</div>`;
     return `<div class="contrast"><div class="ct-head">You picked ${esc(other.name)} · how to tell them apart</div>
       ${note ? `<p>${esc(note)}</p>` : `<p><b>${esc(other.name)}</b> is different: ${esc(other.listen)}</p>`}
-      ${SE.has(other.id) || SE.has(card.id) ? `<p class="abhint">Listen to both back to back:</p>` : ""}<div class="abrow">${ab(other)}${ab(card)}</div></div>`;
+      <p class="abhint">Listen to both back to back:</p><div class="abrow">${ab(other)}${ab(card)}</div>${vid(other)}${q.card.id === card.id && !SE.has(card.id) ? "" : vid(card)}</div>`;
   }
   function answer(btn) {
     const ok = btn.dataset.ok === "true", card = q.card;
@@ -291,6 +292,7 @@
       <button class="linkbtn" id="qOpen">Open full card ↻</button>`;
     $("#qReveal").classList.remove("hidden");
     $("#qOpen").addEventListener("click", () => openCard(card));
+    $("#qReveal").querySelectorAll("[data-loadvideo]").forEach(b => b.addEventListener("click", () => loadVideo(b.closest(".video"))));
     $("#qReveal").querySelectorAll("[data-ab]").forEach(b => b.addEventListener("click", () => { stopVideos(); playCard(byId[b.dataset.ab], b, b.dataset.ab === card.id ? card.name.toUpperCase() : byId[b.dataset.ab].name.toUpperCase()); }));
     $("#qNext").textContent = q.i + 1 < ROUNDS ? "NEXT ▸" : "SEE SCORE ▸";
     $("#qNext").classList.remove("hidden");
