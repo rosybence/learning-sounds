@@ -965,12 +965,12 @@
     return 32 * st + 1;
   };
   R.dubbass = (ac, out, t) => {
-    const st = 60 / 70 / 4, len = 32 * st, d = drive(ac, gainNode(ac, out, 0.9), 1.4);
-    const line = [[0, 38, 2], [2, 41, 1], [3, 43, 1], [4, 45, 3], [8, 43, 2], [10, 41, 1], [11, 38, 3], [16, 38, 2], [18, 41, 1], [19, 43, 1], [20, 45, 2], [22, 48, 2], [24, 45, 2], [26, 43, 2], [28, 41, 4]];
-    oneDropDrums(ac, out, t, st, 2, 0.3);                 // roots dub
-    steppersDrums(ac, out, t + len, st / 2, 4, 0.45);     // UK steppas: kick on every beat at 140
-    [0, len].forEach(off => line.forEach(([i, n, l]) => warmBass(ac, d, t + off + i * st, midi(n), l * st * 0.92, 0.6)));
-    return 2 * len + 0.8;
+    const st = 60 / 72 / 4, d = drive(ac, gainNode(ac, out, 0.9), 1.4);
+    // just the bassline, with soft hats for timing
+    for (let i = 0; i < 32; i += 2) hat(ac, out, t + i * st, { vol: 0.05, freq: 7000 });
+    [[0, 38, 2], [2, 41, 1], [3, 43, 1], [4, 45, 3], [8, 43, 2], [10, 41, 1], [11, 38, 3], [16, 38, 2], [18, 41, 1], [19, 43, 1], [20, 45, 2], [22, 48, 2], [24, 45, 2], [26, 43, 2], [28, 41, 4]]
+      .forEach(([i, n, l]) => warmBass(ac, d, t + i * st, midi(n), l * st * 0.92, 0.6));
+    return 32 * st + 0.8;
   };
   R.melodica = (ac, out, t) => {
     const st = 60 / 76 / 4; oneDropDrums(ac, out, t, st, 2, 0.5);
