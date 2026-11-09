@@ -96,7 +96,7 @@ window.CARDS = [
   },
   {
     id: "siren", name: "Dub siren", aka: "Sound-system siren",
-    genre: "dub", also: ["Jungle", "Dubstep", "Steppas"], type: "FX",
+    genre: "dub", also: ["Jungle", "Dubstep", "UK steppas"], type: "FX",
     listen: "A rising, wailing electronic siren that loops and echoes away into a long delay tail.",
     recipe: [
       "One oscillator (square or sine).",
@@ -182,7 +182,7 @@ window.CARDS = [
   },
   {
     id: "dubdelay", name: "Dub delay throws", aka: "Echo throws, spring reverb",
-    genre: "dub", also: ["Dubstep", "Jungle", "Steppas"], type: "FX",
+    genre: "dub", also: ["Dubstep", "Jungle", "UK steppas"], type: "FX",
     listen: "A single hit or chord that keeps repeating, getting darker and washier as it fades, often with a metallic spring-reverb splash.",
     recipe: [
       "Send a single snare, rim or chord stab to a delay (dotted 8th or 1/4).",
@@ -1157,7 +1157,7 @@ window.CARDS = [
   {
     id: "dubbass", name: "Rolling dub bassline", aka: "Reggae bass",
     genre: "dub", also: ["Roots reggae", "Dubstep", "Jungle"], type: "Bass",
-    listen: "A deep, round, melodic bassline that sings a short phrase over and over. It's the lead instrument in dub: loud, warm and rolling, with the drums and echoes around it.",
+    listen: "A deep, round, melodic bassline that sings a short phrase over and over. It's the lead instrument in dub, loud and warm with the drums pushed back. UK steppas uses the same kind of bass, just darker and more repetitive over a four-to-the-floor kick.",
     recipe: [
       "Warm, round tone: sine/triangle or a muted bass guitar, low-passed.",
       "Write a catchy 1–2 bar melodic phrase with rests.",
@@ -1173,12 +1173,13 @@ window.CARDS = [
     tutorials: ["how to write a reggae dub bassline", "dub bass sound tutorial"],
     examples: [
       { artist: "The Revolutionaries", track: "Kunta Kinte Dub", year: 1976, yt: "K6XDIje4vJU", t: 0 },
-      { artist: "Scientist", track: "Dance of the Vampires", year: 1981, yt: "mswVkpgX8EU", t: 0 }
+      { artist: "Scientist", track: "Dance of the Vampires", year: 1981, yt: "mswVkpgX8EU", t: 0 },
+      { artist: "Jah Shaka", track: "African Beat", year: 1991, yt: "iRi2jNa8fX4", t: 0, note: "UK steppas style" }
     ]
   },
   {
     id: "melodica", name: "Melodica lead", aka: "Far East sound",
-    genre: "dub", also: ["Roots reggae", "Steppas"], type: "Synth",
+    genre: "dub", also: ["Roots reggae", "UK steppas"], type: "Synth",
     listen: "A reedy, slightly wheezy keyboard-harmonica tone playing mournful minor melodies, drenched in echo. Made famous by Augustus Pablo.",
     recipe: [
       "A reed-like tone: square/saw through a band-pass filter, or a melodica sample.",
@@ -1200,7 +1201,7 @@ window.CARDS = [
   // ---------- steppas ----------
   {
     id: "steppersbeat", name: "Steppers beat", aka: "Steppas rhythm, rockers",
-    genre: "steppas", also: ["Dub", "Roots reggae", "UK sound system"], type: "Drums",
+    genre: "dub", also: ["Steppas", "Roots reggae", "UK sound system"], type: "Drums",
     listen: "A marching, militant reggae beat: a kick on every beat with the rimshot/snare on beat 3, at about 70–75 BPM (felt as 140–150). Heavier and more driving than one drop.",
     recipe: [
       "Tempo 70–75 BPM (or program at 140–150 in half-time).",
@@ -1217,28 +1218,6 @@ window.CARDS = [
     examples: [
       { artist: "The Revolutionaries", track: "Kunta Kinte Dub", year: 1976, yt: "K6XDIje4vJU", t: 0, note: "Sly Dunbar's classic steppers drumming" },
       { artist: "Iration Steppas & Tena Stelin", track: "Dub Arena Dub", year: 2014, yt: "PR6D5OYiBk8", t: 0 }
-    ]
-  },
-  {
-    id: "steppasbass", name: "Steppas sub bassline", aka: "Sound-system bass",
-    genre: "steppas", also: ["Dub", "Dubstep", "UK sound system"], type: "Bass",
-    listen: "A huge, deep, repetitive sub-bass riff that drives the whole track on a sound system, locking with the four-to-the-floor steppers kick. Darker and more relentless than roots dub bass.",
-    recipe: [
-      "Deep sine or sine+triangle bass, very little top end.",
-      "Repetitive 1–2 bar riff in 8th notes, often minor and militant.",
-      "Lock it to the steppers kick.",
-      "Mix it loud: it's meant for big sound-system speakers."
-    ],
-    plugins: [
-      { name: "3x Osc", where: "FL", note: "Sine bass" },
-      { name: "Fruity Limiter", where: "FL", note: "Control the low end" },
-      { name: "Vital", where: "Free", note: "Sub patch" }
-    ],
-    inFL: true,
-    tutorials: ["steppa dub bassline tutorial", "uk dub sound system bass"],
-    examples: [
-      { artist: "Iration Steppas & Tena Stelin", track: "Dub Arena Dub", year: 2014, yt: "PR6D5OYiBk8", t: 0 },
-      { artist: "Jah Shaka", track: "African Beat", year: 1991, yt: "iRi2jNa8fX4", t: 0 }
     ]
   }
 ];
@@ -1257,10 +1236,8 @@ window.GENRES = {
   complextro: { label: "Complextro", color: "#ff6af0" },
   reggaeton: { label: "Reggaeton", color: "#e0a050" },
   trap: { label: "Trap", color: "#8a94ff" },
-  dub: { label: "Dub", color: "#06d6a0" },
-  steppas: { label: "Steppas", color: "#ff9e00" },
+  dub: { label: "Dub / Steppas", color: "#06d6a0" },
   reggaeton: { label: "Reggaeton", color: "#e0a050" },
   trap: { label: "Trap", color: "#8a94ff" },
-  dub: { label: "Dub", color: "#06d6a0" },
-  steppas: { label: "Steppas", color: "#ff9e00" }
+  dub: { label: "Dub / Steppas", color: "#06d6a0" }
 };

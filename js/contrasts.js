@@ -46,9 +46,7 @@ window.CONTRASTS = {
   "onedrop|steppersbeat": "One drop has no kick on beat 1 and only hits on beat 3. Steppers puts a kick on every beat, so it marches forward.",
   "house909|steppersbeat": "Both have four-to-the-floor kicks. House is ≈124 BPM with open hats and claps on 2 and 4. Steppers is slow reggae (≈72 BPM) with a rimshot on beat 3.",
   "dembow|onedrop": "Dembow has a kick on every beat and two snappy snares per half-bar. One drop has no kick on beat 1 and a single rimshot on beat 3.",
-  "dubbass|steppasbass": "Roots dub bass is melodic and singing. Steppas bass is a darker, more relentless riff locked to a four-to-the-floor kick.",
   "dubbass|sub": "A dubstep sine sub holds plain low notes. A dub bassline is a melodic, rolling phrase that is the lead instrument.",
-  "steppasbass|sub": "A dubstep sub sits under half-time drums. The steppas bass is a constant riff locked to a four-to-the-floor kick.",
   "skank|stabs": "Garage stabs are jazzy synth chords in syncopated rhythms. The reggae skank is a short choppy guitar/organ chord on every off-beat.",
   "melodica|trapmelody": "The trap melody is a dark flute or bell. The melodica is a reedy, wheezy keyboard-harmonica tone drenched in dub echo.",
   "dubdelay|skank": "The skank is the off-beat chord itself. Dub delay is what happens when one of those hits is thrown into a long echo.",
@@ -119,7 +117,6 @@ window.GENRE_INFO = {
   complextro: "≈128 BPM, four-to-the-floor electro house · basses and leads that switch instruments every few notes, chiptune leads, gritty saws, laser zaps and heavy sidechain pumping.",
   reggaeton: "≈88–100 BPM · the dembow rhythm (kick on every beat, boom-ch-boom-chick snare), bouncing 808 bass, plucked guitar hooks, Spanish-language hype vocals.",
   trap: "≈130–150 BPM, half-time · booming 808s that glide, rapid hi-hat rolls, claps on beat 3, dark flute/bell loops and producer tags.",
-  dub: "≈70–80 BPM · slow Jamaican reggae remixed on the mixing desk: one drop drums, melodic bass up front, skanks thrown into echo and spring reverb, sirens and melodica.",
-  steppas: "≈70–75 BPM (felt as 140–150) · militant UK sound-system dub: four-to-the-floor steppers kick, rimshot on 3, huge repetitive sub-bass riffs, sirens and echoes.",
+  dub: "≈70–80 BPM (steppas felt at 140–150) · reggae remixed on the mixing desk: one drop or four-to-the-floor steppers drums, melodic bass up front, skanks thrown into echo, sirens and melodica.",
   dubtechno: "118–125 BPM · hypnotic and muffled: chord stabs echoing into long delays, soft steady kicks, tape hiss."
 };

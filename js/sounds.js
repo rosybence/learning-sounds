@@ -964,10 +964,10 @@
     return 32 * st + 1;
   };
   R.dubbass = (ac, out, t) => {
-    const st = 60 / 76 / 4; oneDropDrums(ac, out, t, st, 2, 0.6);
+    const st = 60 / 76 / 4; oneDropDrums(ac, out, t, st, 2, 0.25);
     const d = drive(ac, gainNode(ac, out, 0.9), 1.4);
     [[0, 38, 2], [2, 41, 1], [3, 43, 1], [4, 45, 3], [8, 43, 2], [10, 41, 1], [11, 38, 3], [16, 38, 2], [18, 41, 1], [19, 43, 1], [20, 45, 2], [22, 48, 2], [24, 45, 2], [26, 43, 2], [28, 41, 4]]
-      .forEach(([i, n, l]) => warmBass(ac, d, t + i * st, midi(n), l * st * 0.92, 0.45));
+      .forEach(([i, n, l]) => warmBass(ac, d, t + i * st, midi(n), l * st * 0.92, 0.6));
     return 32 * st + 0.8;
   };
   R.melodica = (ac, out, t) => {
@@ -985,13 +985,6 @@
   R.steppersbeat = (ac, out, t) => {
     const st = 60 / 72 / 4; steppersDrums(ac, out, t, st, 2);
     [0, 4, 8, 12, 16, 20, 24, 28].forEach((i, k) => warmBass(ac, out, t + i * st, midi([33, 33, 36, 31][Math.floor(k / 2)]), 3.6 * st, 0.28));
-    return 32 * st + 1;
-  };
-  R.steppasbass = (ac, out, t) => {
-    const st = 60 / 72 / 4; steppersDrums(ac, out, t, st, 2, 0.75);
-    const d = drive(ac, gainNode(ac, out, 0.95), 1.5);
-    const riff = [[0, 33, 2], [2, 33, 1], [3, 36, 1], [4, 40, 2], [6, 38, 2], [8, 36, 2], [10, 33, 1], [11, 31, 1], [12, 33, 4]];
-    for (let b = 0; b < 2; b++) riff.forEach(([i, n, l]) => warmBass(ac, d, t + (b * 16 + i) * st, midi(n - (b && i >= 12 ? 2 : 0)), l * st * 0.9, 0.5));
     return 32 * st + 1;
   };
 
