@@ -89,6 +89,7 @@ window.CARDS = [
     inFL: true,
     tutorials: ["ragga jungle vocal chop tutorial", "how to make ragga jungle fl studio"],
     examples: [
+      { artist: "Demo clip", track: "Ragga vocal samples (demo)", year: null, yt: "HNNRYQpQi10", t: 0, note: "Goes straight to the sound" },
       { artist: "M-Beat feat. General Levy", track: "Incredible", year: 1994, yt: "VcgsvxDsZV0", t: 0 },
       { artist: "Shy FX & UK Apache", track: "Original Nuttah", year: 1994, yt: "sxbekgL4w7w", t: 0 }
     ]
@@ -284,6 +285,7 @@ window.CARDS = [
     inFL: true,
     tutorials: ["uk garage vocal chop tutorial", "burial style vocal chops tutorial"],
     examples: [
+      { artist: "Demo clip", track: "UK garage vocal chops (sample pack demo)", year: null, yt: "TOOlV5SQhEM", t: 0, note: "Goes straight to the sound" },
       { artist: "Burial", track: "Archangel", year: 2007, yt: "8k_f2QK77ew", t: 0 },
       { artist: "Todd Edwards", track: "Saved My Life", year: 1996, note: "Pioneer of chopped vocals", yt: "U-RE8IsrzzM", t: 0 }
     ]
@@ -504,6 +506,7 @@ window.CARDS = [
     inFL: true,
     tutorials: ["speed garage bass tutorial", "armand van helden bass sound how to"],
     examples: [
+      { artist: "Demo clip", track: "Speed garage bass (track preview)", year: null, yt: "ncQTmTyBwUY", t: 16, note: "Goes straight to the sound" },
       { artist: "Sneaker Pimps", track: "Spin Spin Sugar (Armand's Dark Garage Mix)", year: 1996, yt: "XXE6nG7W9zs", t: 0 },
       { artist: "187 Lockdown", track: "Gunman", year: 1997, yt: "clnEkzPF_4Y", t: 0 }
     ]
@@ -637,6 +640,7 @@ window.CARDS = [
     inFL: false,
     tutorials: ["hyperpop vocal tutorial autotune", "100 gecs vocal effect"],
     examples: [
+      { artist: "Demo clip", track: "Hyperpop autotune vocals (short demo)", year: null, yt: "YyszTwRv05Y", t: 0, note: "Goes straight to the sound" },
       { artist: "100 gecs", track: "money machine", year: 2019, yt: "z97qLNXeAMQ", t: 0 },
       { artist: "Hannah Diamond", track: "Every Night", year: 2014, yt: "EPFvbc4onks", t: 0 }
     ]
@@ -661,6 +665,7 @@ window.CARDS = [
     inFL: true,
     tutorials: ["how to make bassline house bass niche", "uk bassline wobble bass tutorial"],
     examples: [
+      { artist: "Demo clip", track: "UKG / bassline wobble bass (short demo)", year: null, yt: "x2YEXdRm0uQ", t: 0, note: "Goes straight to the sound" },
       { artist: "DJ Q feat. MC Bonez", track: "You Wot!", year: 2008, yt: "39Kz5aZGb_k", t: 0 },
       { artist: "T2", track: "Heartbroken", year: 2007, yt: "KG28976TmDM", t: 0 }
     ]
@@ -705,6 +710,7 @@ window.CARDS = [
     inFL: true,
     tutorials: ["how to make airhorn sound synth", "dub siren airhorn fx tutorial"],
     examples: [
+      { artist: "Demo clip", track: "Dancehall airhorn sound effects", year: null, yt: "9xlY4267Qr8", t: 0, note: "Goes straight to the sound" },
       { artist: "187 Lockdown", track: "Gunman", year: 1997, yt: "clnEkzPF_4Y", t: 0 },
       { artist: "Double 99", track: "RIP Groove", year: 1997, yt: "uR3Vw8J8vUo", t: 0 }
     ]
