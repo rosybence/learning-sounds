@@ -553,26 +553,6 @@
     return dur + 0.4;
   };
 
-  R.hyper808 = (ac, out, t) => {
-    const st = 60 / 150 / 4, dur = 32 * st;
-    const crush = drive(ac, gainNode(ac, out, 0.55), 9);
-    const g = ac.createGain(); g.gain.value = 0.0001; g.connect(crush);
-    const o = osc(ac, "sine", midi(31), g, t, t + dur);
-    const notes = [[0, 31, 6], [6, 34, 4], [10, 29, 6], [16, 31, 6], [22, 38, 3], [25, 36, 7]];
-    notes.forEach(([i, n, l], k) => {
-      const s0 = t + i * st, e0 = s0 + l * st;
-      if (k === 0) o.frequency.setValueAtTime(midi(n) * 3, s0);
-      o.frequency.setTargetAtTime(midi(n), s0, k ? 0.035 : 0.02);   // glide
-      g.gain.setValueAtTime(0.0001, s0); g.gain.exponentialRampToValueAtTime(0.3, s0 + 0.005); g.gain.setTargetAtTime(0.18, s0 + 0.05, 0.3); g.gain.setTargetAtTime(0.0001, e0 - 0.03, 0.02);
-      kick(ac, out, s0, { vol: 0.5, decay: 0.12, f1: 70 });
-    });
-    [8, 24].forEach(i => { clap(ac, out, t + i * st, 0.55); snare(ac, out, t + i * st, { vol: 0.5 }); });
-    // hat rolls: 16ths, then 32nds and triplets
-    for (let i = 0; i < 32; i += 2) hat(ac, out, t + i * st, { vol: 0.12, freq: 9000 });
-    for (let k = 0; k < 8; k++) hat(ac, out, t + (12 + k * 0.5) * st, { vol: 0.1, freq: 9500 });
-    for (let k = 0; k < 9; k++) hat(ac, out, t + (28 + k * (4 / 9)) * st, { vol: 0.1, freq: 9500 });
-    return dur + 0.3;
-  };
 
   R.supersaw = (ac, out, t) => {
     const st = 60 / 150 / 4, dur = 32 * st;

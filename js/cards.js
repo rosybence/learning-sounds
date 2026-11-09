@@ -535,28 +535,6 @@ window.CARDS = [
   },
   // ---------- hyperpop ----------
   {
-    id: "hyper808", name: "Blown-out 808", aka: "Distorted 808, clipped 808",
-    genre: "hyperpop", also: ["Trap", "Rage", "Bubblegum bass"], type: "Bass",
-    listen: "A huge 808 bass that's been distorted until it buzzes and crackles, gliding between notes, under fast hi-hat rolls.",
-    recipe: [
-      "Start with a long 808 (sine with a pitch drop).",
-      "Glide (portamento) between notes.",
-      "Distort/clip it hard so it buzzes even on phone speakers.",
-      "Add fast hi-hat rolls (1/16 and 1/32 triplets) at 140–160 BPM."
-    ],
-    plugins: [
-      { name: "FL 808 samples + Fruity Slide", where: "FL", note: "Use slide notes for glides" },
-      { name: "Fruity Soft Clipper / Distructor", where: "FL", note: "Clip it hard" },
-      { name: "Vital", where: "Free", note: "Sine + pitch env + distortion" }
-    ],
-    inFL: true,
-    tutorials: ["how to make distorted 808 hyperpop", "100 gecs 808 tutorial"],
-    examples: [
-      { artist: "100 gecs", track: "money machine", year: 2019, yt: "z97qLNXeAMQ", t: 0 },
-      { artist: "Charli XCX", track: "Vroom Vroom", year: 2016, yt: "qfAqtFuGjWM", t: 0 }
-    ]
-  },
-  {
     id: "supersaw", name: "Supersaw lead", aka: "Trance saw, euphoric saw",
     genre: "hyperpop", also: ["Trance", "Happy hardcore", "EDM"], type: "Synth",
     listen: "A massive, bright, shimmering wall of saw waves playing euphoric chords — like trance turned up to max.",
@@ -986,14 +964,14 @@ window.CARDS = [
     ]
   },
   {
-    id: "glide808", name: "Trap 808 glide", aka: "808 slide",
-    genre: "trap", also: ["Drill", "Hip hop", "Latin trap"], type: "Bass",
-    listen: "A long, deep 808 bass that slides smoothly up and down between notes, booming under the beat. Cleaner than the hyperpop version.",
+    id: "glide808", name: "808 glide", aka: "808 slide, blown-out 808",
+    genre: "trap", also: ["Hyperpop", "Drill", "Rage", "Latin trap"], type: "Bass",
+    listen: "A long, deep 808 bass that slides smoothly up and down between notes, booming under the beat. Trap usually keeps it clean; hyperpop and rage distort it until it buzzes.",
     recipe: [
       "A long 808 sample or sine with a slight pitch drop.",
       "Turn on glide/portamento (FL: slide notes or Fruity Slide).",
       "Overlap notes so the pitch slides between them.",
-      "Light saturation so it's audible on small speakers."
+      "Light saturation so it's audible on small speakers, or clip it hard for the blown-out hyperpop sound."
     ],
     plugins: [
       { name: "FL 808 samples + slide notes", where: "FL", note: "Slide notes in the piano roll" },
@@ -1004,7 +982,8 @@ window.CARDS = [
     tutorials: ["how to make 808 glides fl studio", "808 slide tutorial"],
     examples: [
       { artist: "Travis Scott feat. Drake", track: "SICKO MODE", year: 2018, yt: "6ONRf7h3Mdk", t: 0 },
-      { artist: "Lil Uzi Vert", track: "XO Tour Llif3", year: 2017, yt: "WrsFXgQk5UI", t: 0 }
+      { artist: "Lil Uzi Vert", track: "XO Tour Llif3", year: 2017, yt: "WrsFXgQk5UI", t: 0 },
+      { artist: "100 gecs", track: "money machine", year: 2019, yt: "z97qLNXeAMQ", t: 0, note: "Blown-out hyperpop version" }
     ]
   },
   {
