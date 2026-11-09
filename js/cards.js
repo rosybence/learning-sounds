@@ -1157,7 +1157,7 @@ window.CARDS = [
   {
     id: "dubbass", name: "Rolling dub bassline", aka: "Reggae bass",
     genre: "dub", also: ["Roots reggae", "Dubstep", "Jungle"], type: "Bass",
-    listen: "A deep, round, melodic bassline that sings a short phrase over and over. It's the lead instrument in dub, loud and warm with the drums pushed back. UK steppas uses the same kind of bass, just darker and more repetitive over a four-to-the-floor kick.",
+    listen: "A deep, round, melodic bassline that sings a short phrase over and over. It's the lead instrument in dub, loud and warm with the drums pushed back. The demo plays it twice: first over a one drop beat (roots dub), then over a four-to-the-floor steppers kick (UK steppas).",
     recipe: [
       "Warm, round tone: sine/triangle or a muted bass guitar, low-passed.",
       "Write a catchy 1–2 bar melodic phrase with rests.",
